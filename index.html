@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/aa3926d4f9.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./style.css">
+    <title>mY sPacE</title>
+</head>
+<body>
+    <!-- Login Form -->
+    <form class="login ">
+        <span>Enter your name to sit your desk 💼</span>
+        <input type="text" placeholder="Your Name">
+    </form>
+
+
+    <div class="container hidden">
+        <!-- outside of desk -->
+        <div class="oustside-desk">
+            <!-- GREETING -->
+            <h2 class="greeting">< dodo's desk ></h2>
+            <div class="clock">
+                <h2></h2>
+            </div>
+        </div>
+
+        <!-- DESK -->
+        <div class="desk">
+            <div class="left">
+                <!-- BOOK -->     
+                <div class="book">
+                    <h3>Today's Quote</h3>
+                    <h4 class="quote"></h4>
+                    <span class="author"></span>
+                </div>
+                <div id="weather">
+                    <h3>Today's weather</h3>
+                    <span class="weather"></span>
+                    <span class="location"></span>
+                </div>
+                <div class="images">
+                    <img class="running" src="./icon/exercise.png" alt="running">
+                    <h1>"Your efforts will never betray you."</h1>
+                </div>
+            </div>
+
+            <!-- TODO-LIST -->
+            <div class="pad">
+                <form id="todo-form">
+                    <span>🧾 TODO-LIST</span>
+                    <input type="text" placeholder="write a TODO and press enter">
+                </form>
+                <ul class="todo-list"></ul>
+            </div>
+            <!-- CLOCK -->
+
+
+        </div>
+    </div>
+
+    <script src="./js/quotes.js"></script>
+    <script src="./js/clock.js"></script>
+    <script src="./js/weather.js"></script>
+    <script src="./js/loginAndGreeting.js"></script>
+    <script src="./js/todoList.js"></script>
+    
+</body>
+</html>

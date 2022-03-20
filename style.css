@@ -1,0 +1,237 @@
+:root{
+    /* COLOR*/
+    --color-bg-login : #f8f9fa;
+    --color-shadow-login :lightgray;
+    --color-border-input:#f0f0f0;
+    --color-border-input-focus: #777;
+}
+
+*,
+*::before,
+*::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+li{
+    list-style: none;
+}
+button{
+    background: none;
+    border : none;
+    cursor: pointer;
+}
+body{
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* LOGIN FORM */
+.login{
+    width: 400px;
+    background-color: var(--color-bg-login);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding : 20px 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 2px var(--color-shadow-login);
+}
+.login span{
+    margin-bottom: 20px;
+    font-size: 20px;
+    color:rgb(88, 87, 87);
+}
+.login input{
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 5px;
+    width: 95%;
+    border:2px solid var(--color-border-input) ;
+}
+.login input:focus{
+    outline: 0;
+    border-color:var(--color-border-input-focus);
+}
+
+/* CONTAINER */
+.container{
+    /* border : 1px solid black; */
+    width: 60vw;
+    height: 90vh;
+    margin : 30px;
+}
+.oustside-desk{
+    width: 60vw;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.greeting{
+    margin: auto;
+}
+
+.dispaly-all{
+    margin-right: 30px;
+}
+
+/* DESK */
+.desk{
+    width: 60vw;
+    border : 3px solid black;
+    height: 80vh;
+    display: flex;
+    justify-content: space-around;
+}
+
+/* BOOK */
+.book{
+    margin: 20px;
+    width: 450px;
+    height: 200px;
+    background-color: var(--color-bg-login);
+    border-radius: 10px;
+    box-shadow: 0 0 10px 2px var(--color-shadow-login);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    position: relative;
+}
+
+.book .bgImg{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: 1;
+    opacity: 0.3;
+    border-radius: 10px;
+}
+#weather{
+    width: 450px;
+    height: 120px;
+    margin: 20px;
+    background-color: var(--color-bg-login);
+    border-radius: 10px;
+    box-shadow: 0 0 10px 2px var(--color-shadow-login);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#weather .weather{
+    font-size: 30px;
+    color : gray;
+}
+#weather .location{
+    font-size: 25px;
+    color:gray;
+}
+
+.images{
+    width: 450px;
+    height: 350px;
+    margin: 20px;
+    padding: 20px;
+    /* background-color: greenyellow; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  
+}
+
+.images .running{
+    width: 100px;
+}
+
+
+/* TODO LIST */
+.pad{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    width: 500px;
+    height: 75vh;
+    background-color: var(--color-bg-login);
+    border-radius: 10px;
+    box-shadow: 0 0 10px 2px var(--color-shadow-login);
+
+}
+#todo-form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding:10px;
+    border-bottom: 1px, solid, var(--color-border-input-focus);
+}
+#todo-form span{
+    margin-bottom: 10px;
+}
+#todo-form input{
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 5px;
+    width: 95%;
+    border:2px solid var(--color-border-input) ;
+}
+
+#todo-form input:focus{
+    outline: 0;
+    border-color:var(--color-border-input-focus);
+}
+.todo-list{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.todo-list li{
+    width: 90%;
+    margin-bottom: 10px;
+    padding:10px;
+    border-radius: 10px;
+    background-color: var(--color-border-input);
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.todo-list li .btn-remove{
+    color : var(--color-border-input-focus);
+    position: absolute;
+    right: 20px;
+}
+
+.todo-list .btn-check{
+    width: 16px;
+    height: 16px;
+    border:1px solid gray;
+    border-radius: 10px;
+    margin-right: 10px;
+    background-color: var(--color-border-input);
+}
+.todo-list .line-through{
+    text-decoration: line-through;
+    color : var(--color-border-input-focus);
+}
+.todo-list .color-change{
+    background-color: #2ecc71;
+    border : none;
+}
+.clock{
+    margin:10px;
+}
+
+
+
+
+.hidden{
+    display: none;
+}
