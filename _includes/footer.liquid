@@ -1,0 +1,88 @@
+{% capture footer_contents %}
+  {{ site.footer_text }}
+  {% if site.impressum_path %}
+    <a href="{{ site.url }}{{ site.baseurl }}{{ site.impressum_path }}">Impressum</a>.
+  {% endif %}
+  {% if site.last_updated %}
+    Last updated: {{ 'now' | date: '%B %d, %Y' }}.
+  {% endif %}
+{% endcapture %}
+
+{% if site.footer_fixed %}
+  {% comment %}
+    Local override: social icon row (from _data/socials.yml) above the
+    copyright line, so the icons are always visible without scrolling.
+    Styles are inline because main.css carries a static cache-bust hash.
+  {% endcomment %}
+  {% assign soc = site.data.socials %}
+  <style>
+    /* site-wide: barely-there lavender page background (light mode only; dark theme keeps its own,
+       since html[data-theme=dark] outranks :root). Injected here because this include is on every page. */
+    /* MIT-inspired palette: crimson #B20D35 in light mode, MIT Bright Red #FF1423 in dark. */
+    :root { --global-bg-color: #fefefd; --global-card-bg-color: #fefefd;
+            --global-theme-color: #B20D35; --global-hover-color: #B20D35;
+            --global-code-bg-color: rgba(178, 13, 53, 0.05); }
+    html[data-theme=dark] { --global-theme-color: #FF1423; --global-hover-color: #FF1423; }
+    /* navbar "research" dropdown: center the panel under its toggle
+       (Bootstrap's .dropdown-menu-right pins it to the right edge, so it spilled leftwards). */
+    #navbar .nav-item.dropdown > .dropdown-menu { left: 50% !important; right: auto !important; transform: translateX(-50%); }
+    /* navbar brand: only the bold first name turns red on hover */
+    #navbar .navbar-brand:hover { color: var(--global-text-color); }
+    #navbar .navbar-brand:hover .font-weight-bold { color: var(--global-theme-color); }
+    /* theme toggle: no "system" (half sun/moon) state */
+    #light-toggle-system { display: none !important; }
+    /* back-to-top: lift above the fixed footer (it was hidden behind it), soft MIT gray,
+       arrow exactly centered; keep the hidden state off-screen and click-through. */
+    #back-to-top { background: #a6a7a8 !important; color: #ffffff !important; bottom: 76px !important; right: 24px !important; z-index: 1031 !important; display: flex !important; align-items: center; justify-content: center; }
+    #back-to-top svg { margin: 0 !important; }
+    #back-to-top.hidden { bottom: -80px !important; opacity: 0 !important; pointer-events: none !important; }
+    body { padding-bottom: 90px; }
+    footer.fixed-bottom .container { padding-top: 0.45rem; padding-bottom: 0.3rem; }
+    footer.fixed-bottom .footer-social { font-size: 1.6rem; line-height: 1; padding-top: 0; margin-bottom: 0.3rem; }
+    footer.fixed-bottom .footer-social a { color: var(--global-footer-text-color); margin: 0 0.22rem; }
+    footer.fixed-bottom .footer-social a:hover { color: var(--global-theme-color); text-decoration: none; }
+  </style>
+  <footer class="fixed-bottom" role="contentinfo">
+    <div class="container mt-0">
+      <div class="footer-social">
+        {% if soc.email %}<a href="mailto:{{ soc.email }}" title="Email" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>{% endif %}
+        {% if soc.github_username %}<a href="https://github.com/{{ soc.github_username }}" title="GitHub" aria-label="GitHub" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a>{% endif %}
+        {% if soc.linkedin_username %}<a href="https://www.linkedin.com/in/{{ soc.linkedin_username }}" title="LinkedIn" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i></a>{% endif %}
+        {% if soc.scholar_userid %}<a href="https://scholar.google.com/citations?user={{ soc.scholar_userid }}" title="Google Scholar" aria-label="Google Scholar" target="_blank" rel="noopener"><i class="ai ai-google-scholar"></i></a>{% endif %}
+      </div>
+      {{ footer_contents }}
+    </div>
+  </footer>
+  <script>
+    /* Theme toggle: light <-> dark only (drop the "system" step). */
+    (function () {
+      function fix() {
+        try {
+          if (typeof determineThemeSetting !== "function" || typeof setThemeSetting !== "function") return;
+          if (determineThemeSetting() === "system") setThemeSetting(determineComputedTheme());
+          toggleThemeSetting = function () {
+            var cur = determineThemeSetting();
+            if (cur === "system") cur = determineComputedTheme();
+            setThemeSetting(cur === "dark" ? "light" : "dark");
+          };
+        } catch (e) {}
+      }
+      if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", fix);
+      else fix();
+    })();
+  </script>
+{% else %}
+  <footer class="sticky-bottom mt-5" role="contentinfo">
+    {% if site.newsletter.enabled %}
+      {% if site.plugins contains 'al_newsletter' %}
+        {% include plugins/al_newsletter_form_center.liquid %}
+      {% else %}
+        {% include newsletter.liquid %}
+      {% endif %}
+    {% endif %}
+
+    <div class="container">
+      {{ footer_contents }}
+    </div>
+  </footer>
+{% endif %}
