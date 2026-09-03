@@ -1,0 +1,470 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta name="google-site-verification" content="qJXjVuIrohIX0FgJ8IhlkpxdliG2G0kZdJgGmDDwO2w"> <meta http-equiv="Permissions-Policy" content="interest-cohort=()"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Doeon Kim (김도언) </title> <meta name="author" content="Doeon Kim"> <meta name="description" content="Doeon Kim (김도언, 숭실대학교) — physics-grounded machine learning for RF / wireless sensing: WiFi-CSI human perception, ray-tracing RF simulation, and sim-to-real transfer. 숭실대학교 김도언 박사과정 연구자의 홈페이지. "> <meta name="keywords" content="wireless sensing, WiFi sensing, RF sensing, CSI, human pose estimation, self-supervised learning, ray tracing, Sionna RT, radio map, physics-informed ML, Doeon Kim, 김도언, 숭실대학교 김도언, 숭실대 김도언, 무선 센싱, WiFi 센싱"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%93%A1&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=f0b101217084a90093badfe99ff9a7d1"> <link rel="canonical" href="https://kimdoeon.github.io/"> <script src="/assets/js/theme.js?v=7af685e2ba20b37fef545c97b8064050"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item active"> <a class="nav-link" href="/">about <span class="sr-only">(current)</span> </a> </li> <li class="nav-item dropdown "> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-nav-dropdown-toggle="true" aria-haspopup="true" aria-expanded="false">research </a> <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"> <a class="dropdown-item " href="/projects/">Research Experience</a> <a class="dropdown-item " href="/research-interests/#wireless-perception">Research Interests</a> </div> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">cv </a> </li> <li class="nav-item "> <a class="nav-link" href="/activities/">activities </a> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title"> <span class="font-weight-bold">Doeon</span> Kim </h1> <p class="desc">Wireless sensing / Physics-grounded machine learning for RF</p> </header> <article> <div class="profile float-right"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/prof_pic-480.webp 480w,/assets/img/prof_pic-800.webp 800w,/assets/img/prof_pic-1400.webp 1400w," type="image/webp" sizes="(min-width: 930px) 270.0px, (min-width: 576px) 30vw, 95vw"> <img src="/assets/img/prof_pic.jpg?v=8669f4f8830fe5b946931d917da335c0" class="img-fluid z-depth-1 rounded" width="100%" height="auto" alt="prof_pic.jpg" loading="eager" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </source></picture> </figure> <div class="more-info"><div class="profile-kw"> <div class="kw-row"> <span>🚀 Self-motivated</span><span>🤝 Collaborative</span> </div> <div class="kw-row"><span>🌱 Resilient</span></div> </div></div> </div> <div class="clearfix"> <ul class="bio-list"> <li> <strong>About me</strong><br> I am a first-year Ph.D. student at <a href="https://ssu.ac.kr/" target="_blank" rel="noopener">Soongsil University</a>, working with <a href="https://vip.ssu.ac.kr/" target="_blank" rel="noopener">VIP Lab</a> and <a href="https://scientific-cloak-ac2.notion.site/SSU-SMART-AI-LAB-176525c18aa88055bcfed975ed81beed" target="_blank" rel="noopener">SmartAILab</a> under the supervision of Prof. Seongheum Kim and Prof. Seongsin Kim. I received my M.S. in Intelligent Semiconductors and B.E. in AI Convergence from Soongsil University.<br><span style="font-weight:700;color:var(--global-theme-color);">→ I am currently looking for a PhD program to join in Fall 2027.</span> </li> <li> <strong>Research</strong><br> My research focuses on <strong>wireless / RF sensing</strong> and <strong>physics-grounded machine learning</strong>. I aim to turn ambient radio signals, especially WiFi Channel State Information (CSI), into reliable human and scene perception systems, and to use <strong>ray-tracing-based RF simulation</strong> to study <strong>sim-to-real generalization</strong> across environments, devices, and deployment conditions.</li> </ul> <p class="contact-line">You can find my <a href="/cv/">cv</a>, or contact me at <strong>ilsin205 [at] soongsil.ac.kr</strong>.</p> <style>
+/* Research cards — self-contained (no Bootstrap), dark-mode friendly. */
+.rcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1.1rem;margin:.8rem 0 2rem}
+.rcard{display:block;border:1px solid var(--global-divider-color,#e6e6e6);border-radius:10px;overflow:hidden;color:inherit;text-decoration:none;background:var(--global-bg-color,#fff);transition:box-shadow .2s,transform .2s}
+.rcard:hover{box-shadow:0 6px 18px rgba(0,0,0,.14);transform:translateY(-2px)}
+.rcard img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block;margin:0}
+.rcard .rc-body{padding:.6rem .8rem .8rem}
+.rcard .rc-title{font-weight:700;font-size:.92rem;line-height:1.25;margin:0 0 .5rem}
+.rcard .rc-tags{display:flex;flex-wrap:wrap;gap:.3rem}
+.rcard .rc-tag{font-size:.7rem;background:rgba(127,127,127,.16);border-radius:999px;padding:.06rem .55rem;white-space:nowrap;opacity:.9}
+/* Research Experience carousel: scroll-snap strip + arrows (cards reachable by swipe/scroll too). */
+.rc-carousel{position:relative;margin:.8rem 0 2rem}
+.rc-rail{display:flex;gap:1.1rem;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:.4rem .15rem;scrollbar-width:none;-ms-overflow-style:none}
+.rc-rail::-webkit-scrollbar{display:none}
+.rc-rail>.rcard{flex:0 0 calc((100% - 3.8rem) / 3);scroll-snap-align:start}
+.rc-rail:focus-visible{outline:2px solid var(--global-hover-color);outline-offset:3px;border-radius:8px}
+.rc-arrow{position:absolute;top:38%;transform:translateY(-50%);z-index:3;width:38px;height:38px;border-radius:50%;border:1px solid var(--global-divider-color,#ddd);background:var(--global-bg-color,#fff);color:var(--global-text-color,#111);cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(0,0,0,.20)}
+.rc-prev{left:-6px}.rc-next{right:-6px}
+.rc-arrow:hover{background:var(--global-hover-color,#eee)}
+.rc-arrow:disabled{opacity:.3;cursor:default;pointer-events:none}
+.rc-noscroll .rc-arrow{display:none}
+@media(max-width:920px){.rc-rail>.rcard{flex:0 0 46%}}
+@media(max-width:600px){.rc-rail>.rcard{flex:0 0 82%}}
+@media(prefers-reduced-motion:reduce){.rc-rail{scroll-behavior:auto}}
+/* Latest Publications: same left column width as the publications page, so thumbnails match in size. */
+@media (min-width:576px){
+.publications li .row > .col-sm-2.abbr{flex:0 0 20%;max-width:20%}
+}
+/* Slightly smaller profile photo on home. */
+.profile img{width:82%;height:auto;display:block;margin-left:auto}
+/* mobile (<576px, profile becomes full-width): center the photo + keyword chips
+   instead of the desktop right-alignment (margin-left:auto). */
+@media (max-width: 575.98px) {
+.profile.float-right{margin-left:0}
+.profile img{margin-right:auto}
+.profile-kw{margin-left:auto !important;margin-right:auto !important}
+}
+/* Home title: "Doeon" in the theme red. */
+h1.post-title .font-weight-bold{color:var(--global-theme-color)}
+/* Capitalize the "News" / "Selected Publications" section headings. */
+.post h2 a[href="/news/"], .post h2 a[href="/publications/"]{text-transform:capitalize}
+/* Divider line (matches the nav-hover color) above home sections — but NOT between Research Experience & Interests (.rc-merge). */
+.post h2:not(.bibliography):not(.rc-merge){border-top:2px solid var(--global-hover-color);border-top-color:color-mix(in srgb, var(--global-hover-color) 22%, transparent);padding-top:1.1rem}
+/* Smaller social icons (cv / email / github / linkedin). */
+.social .contact-icons{font-size:2.2rem}
+/* Icons moved to the fixed footer: hide the bottom social block (icons + contact note) with CSS only, so the profile-photo mirror script can still clone .contact-icons from it. */
+.social{display:none}
+/* Social icons mirrored under the profile photo (cloned by JS below). */
+.profile-contact-icons{margin-top:.7rem;text-align:center;font-size:1.7rem}
+.profile-contact-icons a{margin:0 .4rem}
+/* Bio list: bold label on first line, text below; roomy line-height + gap between items. */
+.bio-list{line-height:1.7;margin:.4rem 0 1rem;padding-left:1.2rem}
+.bio-list li{margin-bottom:1rem}
+.bio-list li:last-child{margin-bottom:0}
+/* Bio links (institutions): subtle gray like the author links, gray underline on hover. */
+.bio-list a{color:var(--global-text-color-light);border-bottom:0 !important;text-decoration:none}
+.bio-list a:hover{color:var(--global-text-color-light);border-bottom:0 !important;text-decoration:underline !important}
+/* Contact line: flow right after the bio (don't clear the tall profile column). */
+.contact-line{clear:none}
+/* author line: Times New Roman serif; every co-author in the same subtle gray as linked coauthors (Jungyoon), own name stays dark (underlined) */
+.publications ol.bibliography li .author{font-family:"Times New Roman",Times,Georgia,serif;color:var(--global-text-color-light)}
+.publications ol.bibliography li .author>em{color:var(--global-text-color)}
+/* Latest Publications thumbnails: same golden-ratio white-letterboxed boxes as the publications page */
+.publications img.preview{max-width:100%;width:100%;aspect-ratio:1.618/1;height:auto;object-fit:contain;background:#fff}
+/* preprint & under-review entries: no venue/date line (matches the publications page) */
+#kim2026emfmap .periodical,#choi2026radiomap .periodical{display:none !important}
+/* News scroll window: hairline translucent scrollbar, shown only while hovering the news box
+   (translucent white in dark mode; a milky translucent gray in light mode, where pure white would vanish). */
+.news .table-responsive{scrollbar-width:thin;scrollbar-color:transparent transparent}
+.news .table-responsive:hover{scrollbar-color:rgba(220,220,220,.65) transparent}
+.news .table-responsive::-webkit-scrollbar{width:3px}
+.news .table-responsive::-webkit-scrollbar-track{background:transparent}
+.news .table-responsive::-webkit-scrollbar-thumb{background:transparent;border-radius:999px}
+.news .table-responsive:hover::-webkit-scrollbar-thumb{background:rgba(220,220,220,.65)}
+html[data-theme="dark"] .news .table-responsive:hover{scrollbar-color:rgba(255,255,255,.55) transparent}
+html[data-theme="dark"] .news .table-responsive:hover::-webkit-scrollbar-thumb{background:rgba(255,255,255,.55)}
+/* personal keyword chips */
+.profile-kw{width:82%;margin:.55rem 0 .15rem auto;display:flex;flex-direction:column;align-items:center;gap:.4rem}
+.kw-row{display:flex;justify-content:center;gap:.4rem}
+.profile-kw span{font-family:Roboto,sans-serif;font-size:.7rem;color:#000;background:#fff;border:0;border-radius:999px;padding:.22rem .7rem;box-shadow:0 2px 6px rgba(0,0,0,.18);white-space:nowrap}
+/* rename the home selected-papers heading to "Latest Publications" (server-side, no JS) */
+.post h2 a[href$="/publications/"]{visibility:hidden;position:relative}
+.post h2 a[href$="/publications/"]::after{content:"Latest Publications";visibility:visible;position:absolute;left:0;top:0;white-space:nowrap}
+.post h2 a[href$="/publications/"]:hover::after{text-decoration:underline}
+/* bold the author's own name (inline so it isn't blocked by the static main.css cache hash) */
+.publications ol.bibliography li .author>em{font-weight:bolder}
+</style> <h2 style="margin-top:2.5rem;clear:both;">Research Experience</h2> <div class="rc-carousel"> <button class="rc-arrow rc-prev" type="button" aria-label="Previous research cards"><svg aria-hidden="true" focusable="false" width="16" height="16" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button> <div class="rc-rail" role="region" aria-label="Research experience cards" tabindex="0"> <a class="rcard" href="/projects/exp1_wifijepa/"><img src="/assets/img/interests/exp-wifijepa-v2.jpg" alt="Self-Supervised WiFi Sensing for 3D Human Pose"><div class="rc-body"> <div class="rc-title">Self-Supervised WiFi Sensing for 3D Human Pose</div> <div class="rc-tags"> <span class="rc-tag">WiFi Sensing</span><span class="rc-tag">Self-Supervised Learning</span><span class="rc-tag">3D Human Pose</span> </div> </div></a><a class="rcard" href="/projects/exp3_radiomap/"><img src="/assets/img/interests/exp-emf-thumb9.jpg" alt="Physics-Aware Multimodal Fusion for Dense EMF Exposure Map Prediction"><div class="rc-body"> <div class="rc-title">Physics-Aware Multimodal Fusion for Dense EMF Exposure Map Prediction</div> <div class="rc-tags"> <span class="rc-tag">EMF Exposure Mapping</span><span class="rc-tag">Vision Transformers</span><span class="rc-tag">Physics-Informed ML</span> </div> </div></a><a class="rcard" href="/projects/exp5_tinyobject/"><img src="/assets/img/interests/tod-thumb.jpg" alt="Tiny Object Detection in Aerial Imagery"><div class="rc-body"> <div class="rc-title">Tiny Object Detection in Aerial Imagery</div> <div class="rc-tags"> <span class="rc-tag">Aerial Imagery</span><span class="rc-tag">Small-Object Detection</span><span class="rc-tag">Cross-Attention</span> </div> </div></a><a class="rcard" href="/projects/exp4_satellite/"><img src="/assets/img/interests/exp-satellite2.jpg" alt="Domain-Adaptive Satellite AI for Child-Center Site Prioritization"><div class="rc-body"> <div class="rc-title">Domain-Adaptive Satellite AI for Child-Center Site Prioritization</div> <div class="rc-tags"> <span class="rc-tag">Domain Adaptation</span><span class="rc-tag">Satellite Imagery</span><span class="rc-tag">Humanitarian ML</span> </div> </div></a> </div> <button class="rc-arrow rc-next" type="button" aria-label="Next research cards"><svg aria-hidden="true" focusable="false" width="16" height="16" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button> </div> <script>
+(function(){document.querySelectorAll('.rc-carousel').forEach(function(c){
+var rail=c.querySelector('.rc-rail'),prev=c.querySelector('.rc-prev'),next=c.querySelector('.rc-next');
+if(!rail||!prev||!next)return;
+var rm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function update(){var ns=rail.scrollWidth<=rail.clientWidth+4;c.classList.toggle('rc-noscroll',ns);rail.tabIndex=ns?-1:0;prev.disabled=rail.scrollLeft<=4;next.disabled=rail.scrollLeft+rail.clientWidth>=rail.scrollWidth-4;}
+function go(d){var card=rail.querySelector('.rcard');if(!card)return;var st=getComputedStyle(rail);var gap=parseFloat(st.columnGap||st.gap)||0;rail.scrollBy({left:d*2*(card.offsetWidth+gap),behavior:rm?'auto':'smooth'});}
+prev.addEventListener('click',function(){go(-1);});next.addEventListener('click',function(){go(1);});
+rail.addEventListener('scroll',update,{passive:true});window.addEventListener('resize',update);update();
+});})();
+</script> <h2 class="rc-merge" style="margin-top:1.5rem;">Research Interests</h2> <div class="rcards"> <a class="rcard" href="/research-interests/#wireless-perception"><img src="/assets/img/interests/wp-sense-thumb3.jpg" alt="Wireless Perception"><div class="rc-body"> <div class="rc-title">Wireless Perception</div> <div class="rc-tags"> <span class="rc-tag">WiFi-CSI</span><span class="rc-tag">mmWave Radar</span><span class="rc-tag">3D Human Pose</span> </div> </div></a> <a class="rcard" href="/research-interests/#rf-simulation"><img src="/assets/img/interests/rt-sim-thumb5.jpg" alt="RT-Based Synthetic Data Generation"><div class="rc-body"> <div class="rc-title">RT-Based Synthetic Data Generation</div> <div class="rc-tags"> <span class="rc-tag">Ray Tracing</span><span class="rc-tag">Synthetic RF Data</span><span class="rc-tag">Sim-to-Real</span> </div> </div></a> <a class="rcard" href="/research-interests/#cross-domain"><img src="/assets/img/interests/cross-domain-thumb.jpg" alt="Cross-Domain Generalization"><div class="rc-body"> <div class="rc-title">Cross-Domain Generalization</div> <div class="rc-tags"> <span class="rc-tag">Domain Shift</span><span class="rc-tag">RF Self-Supervised</span><span class="rc-tag">Generalization</span> </div> </div></a> </div> <script>
+/* News box: keep every item in the list but size the scroll window to exactly the
+   first 4 rows (hover + wheel scrolls to older news). Re-measured on load for fonts. */
+(function () {
+  function capNews() {
+    try {
+      var box = document.querySelector(".news .table-responsive");
+      if (!box) return;
+      var rows = box.querySelectorAll("tr");
+      if (rows.length > 4) {
+        var h = rows[4].getBoundingClientRect().top - rows[0].getBoundingClientRect().top;
+        box.style.maxHeight = Math.ceil(h) + "px";
+        box.style.overflowY = "auto";
+      }
+    } catch (e) {}
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", capNews);
+  else capNews();
+  window.addEventListener("load", capNews);
+})();
+</script> <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Doeon Kim",
+  "alternateName": ["김도언", "Kim Doeon", "Do-eon Kim"],
+  "url": "https://kimdoeon.github.io/",
+  "image": "https://kimdoeon.github.io/assets/img/prof_pic.jpg",
+  "jobTitle": "Researcher",
+  "affiliation": {
+    "@type": "CollegeOrUniversity",
+    "name": "Soongsil University",
+    "alternateName": "숭실대학교",
+    "url": "https://ssu.ac.kr/"
+  },
+  "alumniOf": {
+    "@type": "CollegeOrUniversity",
+    "name": "Soongsil University",
+    "alternateName": "숭실대학교"
+  },
+  "knowsAbout": ["Wireless sensing", "WiFi CSI", "RF ray-tracing simulation", "Self-supervised learning", "3D human pose estimation", "무선 센싱", "WiFi 센싱"],
+  "sameAs": [
+    "https://scholar.google.com/citations?user=9ZV9_yMAAAAJ",
+    "https://github.com/kimdoeon",
+    "https://www.linkedin.com/in/kimdoeon"
+  ]
+}
+</script> <script>
+/* The about (home) layout omits the navbar brand; add "Doeon Kim" at the navbar's far left so it matches every other page. */
+(function () {
+  var c = document.querySelector("#navbar > .container");
+  if (c && !c.querySelector(".navbar-brand")) {
+    var a = document.createElement("a");
+    a.className = "navbar-brand title font-weight-lighter";
+    a.href = "/";
+    a.innerHTML = '<span class="font-weight-bold">Doeon</span> Kim';
+    c.insertBefore(a, c.firstChild);
+  }
+  // Mirror the social icons under the profile photo.
+  var icons = document.querySelector(".social .contact-icons");
+  var profile = document.querySelector(".profile");
+  if (icons && profile && !profile.querySelector(".profile-contact-icons")) {
+    var clone = icons.cloneNode(true);
+    clone.className = "contact-icons profile-contact-icons";
+    profile.appendChild(clone);
+  }
+})();
+</script> </div> <h2> <a href="/news/" style="color: inherit">news</a> </h2> <div class="news"> <div class="table-responsive" style="max-height: 60vw"> <table class="table table-sm table-borderless"> <tr> <th scope="row" style="width: 20%">Aug 12, 2026</th> <td> 🏆 Won <strong>1st place</strong> (MeViSv2-Text Track) at the <strong>8th LSVOS Challenge</strong>, <strong>ECCV 2026</strong> Workshop. </td> </tr> <tr> <th scope="row" style="width: 20%">Aug 05, 2026</th> <td> 🏆 Won <strong>2nd place</strong> (Track 5, Generative Traffic Video Forecasting) at the <strong>10th AI City Challenge</strong>, <strong>ECCV 2026</strong> Workshop. </td> </tr> <tr> <th scope="row" style="width: 20%">Jun 18, 2026</th> <td> Our paper <strong>“WiFi-JEPA: Self-supervised Learning for WiFi-CSI 3D Human Pose Estimation”</strong> was accepted at <strong>ECCV 2026</strong>. 🎉 </td> </tr> <tr> <th scope="row" style="width: 20%">Jun 05, 2026</th> <td> “Structure-Aware Self-Supervised Learning and Link Masking-Based 3D Human Pose Estimation System and Method Using WiFi Channel State Information” was <strong>filed as a patent</strong> — KR Application No. 10-2026-0102154. </td> </tr> <tr> <th scope="row" style="width: 20%">May 01, 2026</th> <td> 🏆 Won <strong>2nd place</strong> (Track 3, AI-Generated Image Detection) at the <strong>IEEE Low-Power Computer Vision Challenge</strong>, ECV Workshop @ <strong>CVPR 2026</strong> ($3,000). </td> </tr> <tr> <th scope="row" style="width: 20%">Feb 28, 2026</th> <td> Received my <strong>M.S. in Intelligent Semiconductors</strong> from <strong>Soongsil University</strong>. 🎓 </td> </tr> </table> </div> </div> <h2> <a href="/publications/" style="color: inherit">selected publications</a> </h2> <div class="publications"> <ol class="bibliography"> <li> <div class="row"> <div class="col col-sm-2 abbr"> <abbr class="badge rounded w-100">ECCV 2026</abbr> <figure> <picture> <img src="/assets/img/publication_preview/wifijepa.png" class="preview z-depth-1 rounded" width="100%" height="auto" alt="wifijepa.png" data-zoomable loading="eager" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> <div id="kim2026csipose" class="col-sm-8"> <div class="title">WiFi-JEPA: Self-supervised Learning for WiFi-CSI 3D Human Pose Estimation</div> <div class="author"> <em>Doeon Kim<sup>*</sup></em>, <a href="https://jungyoon-lee.github.io/" rel="external nofollow noopener" target="_blank">Jungyoon Lee<sup>*</sup></a>, Seongsin Kim, and Seongheum Kim </div> <div class="periodical"> <em><a href="https://eccv.ecva.net/" rel="external nofollow noopener" target="_blank">ECCV 2026</a>, Malmö, Sweden</em>, Sep 2026 </div> <div class="periodical"> </div> <div class="links"> <a class="abstract btn btn-sm z-depth-0" role="button">Abs</a> <a href="https://arxiv.org/pdf/2607.11064" class="btn btn-sm z-depth-0" role="button" target="_blank" rel="noopener">PDF</a> <a href="https://wifi-jepa.github.io/" class="btn btn-sm z-depth-0" role="button" rel="external nofollow noopener" target="_blank">Web</a> </div> <div class="abstract hidden"> <p>A CSI-native self-supervised framework that learns WiFi-CSI representations by predicting masked latent embeddings rather than reconstructing raw CSI, using CSI-aware tokenization and a ray-tracing-based synthetic-CSI pretraining pipeline. It improves 3D human-pose accuracy over supervised and prior CSI baselines, including in multi-person settings.</p> </div> </div> </div> </li> <li> <div class="row"> <div class="col col-sm-2 abbr"> <abbr class="badge rounded w-100">Under Review</abbr> <figure> <picture> <img src="/assets/img/publication_preview/mmwave.png" class="preview z-depth-1 rounded" width="100%" height="auto" alt="mmwave.png" data-zoomable loading="eager" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> <div id="zheng2026prism" class="col-sm-8"> <div class="title">Physics-Bounded mmWave Sensing for Schedulable, Privacy-Preserving Human Pose Estimation</div> <div class="author"> Shuntian Zheng, Hongyang He, Jiaqi Li, Xiaoman Lu, <em>Doeon Kim</em>, Jae-Ho Choi, Jin Zeng, Shuai He, and Yu Guan </div> <div class="periodical"> <em><a href="https://www.computer.org/csdl/journal/tm" rel="external nofollow noopener" target="_blank">IEEE Transactions on Mobile Computing</a> <i>(under review)</i></em>, Aug 2026 </div> <div class="periodical"> </div> <div class="links"> <a class="abstract btn btn-sm z-depth-0" role="button">Abs</a> <a href="https://arxiv.org/pdf/2608.14176" class="btn btn-sm z-depth-0" role="button" target="_blank" rel="noopener">PDF</a> </div> <div class="abstract hidden"> <p>PRISM, a framework that exploits the spatial concentration of RF reflections to make mmWave human pose estimation schedulable on resource-limited edge hardware, where cameras are inadmissible and latency must be predictable. It combines physics-bounded integral processing (constant-time integral queries), physics-adaptive instance proposals that decompose multi-person scenes into bounded local subproblems, and deadline-aware operation profiles with offline-verified worst-case bounds. Across four public datasets, PRISM cuts 99th-percentile latency by 24-58% relative to deadline-missing baselines with a 0.0% miss rate, and attains the highest pose accuracy among deadline-feasible configurations.</p> </div> </div> </div> </li> <li> <div class="row"> <div class="col col-sm-2 abbr"> <abbr class="badge rounded w-100">Preprint</abbr> <figure> <picture> <img src="/assets/img/publication_preview/emfmap.png" class="preview z-depth-1 rounded" width="100%" height="auto" alt="emfmap.png" data-zoomable loading="eager" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> <div id="kim2026emfmap" class="col-sm-8"> <div class="title">Multi-Modal Conditioned High-Resolution Transformer for Urban Electromagnetic Field Map Prediction</div> <div class="author"> <em>Doeon Kim</em>, Dongryul Park, Seungyoung Ahn, Namwoo Kang, Seongheum Kim, and Seongsin Kim </div> <div class="periodical"> <em>arXiv</em>, Jul 2026 </div> <div class="periodical"> </div> <div class="links"> <a class="abstract btn btn-sm z-depth-0" role="button">Abs</a> <a href="https://arxiv.org/pdf/2606.27671" class="btn btn-sm z-depth-0" role="button" target="_blank" rel="noopener">PDF</a> </div> <div class="abstract hidden"> <p>A multi-conditioned dense-prediction framework that generates urban EMF maps from building layouts and antenna configurations, using a vision-transformer backbone with feature-modulation and cross-attention conditioning and transmitter-relative spatial channels. It improves EMF-map accuracy over convolutional and unconditioned baselines.</p> </div> </div> </div> </li> <li> <div class="row"> <div class="col col-sm-2 abbr"> <abbr class="badge rounded w-100">Under Review</abbr> <figure> <picture> <img src="/assets/img/publication_preview/radiomap.png" class="preview z-depth-1 rounded" width="100%" height="auto" alt="radiomap.png" data-zoomable loading="eager" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> <div id="choi2026radiomap" class="col-sm-8"> <div class="title">PAMFormer: Propagation-Aware Multimodal Pretraining for Radio Map Estimation</div> <div class="author"> Hyunwoo Choi, <em>Doeon Kim</em>, and Seongsin Kim </div> <div class="periodical"> <em>Manuscript under review</em>, Jun 2026 </div> <div class="periodical"> </div> <div class="links"> <a class="abstract btn btn-sm z-depth-0" role="button">Abs</a> </div> <div class="abstract hidden"> <p>A multimodal Transformer that keeps image patches as a dense spatial stream and fuses tabular antenna metadata via late cross-attention, with masked-image and masked-tabular pretraining objectives. It achieves low error across radio-map prediction settings, outperforming convolutional and Transformer baselines.</p> </div> </div> </div> </li> <li> <div class="row"> <div class="col col-sm-2 abbr"> <abbr class="badge rounded w-100">IEEE Access</abbr> <figure> <picture> <img src="/assets/img/publication_preview/emf-vit.jpg" class="preview z-depth-1 rounded" width="100%" height="auto" alt="emf-vit.jpg" data-zoomable loading="eager" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> <div id="kim2025emfvit" class="col-sm-8"> <div class="title">Estimation of Electromagnetic Field Strength: Experiments Using Vision Transformers</div> <div class="author"> <em>Doeon Kim<sup>*</sup></em>, Dongryul Park<sup>*</sup>, Jinbae Seo, Hyungchan Cho, Seungyoung Ahn, Namwoo Kang, and Seongsin Kim </div> <div class="periodical"> <em><a href="https://ieeeaccess.ieee.org/" rel="external nofollow noopener" target="_blank">IEEE Access</a></em>, Oct 2025 </div> <div class="periodical"> </div> <div class="links"> <a class="abstract btn btn-sm z-depth-0" role="button">Abs</a> <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=11242104" class="btn btn-sm z-depth-0" role="button" target="_blank" rel="noopener">PDF</a> </div> <div class="abstract hidden"> <p>A systematic study of Vision Transformer architectures for predicting 5G electromagnetic-field strength from physically-informed, ray-tracing-generated inputs (building maps, antenna radiation patterns, base-station parameters). Among the compared models an HRFormer-based predictor achieves the best masked MAE of 5.45%, about a 31% error reduction over a U-Net baseline.</p> </div> </div> </div> </li> </ol> </div> <div class="social"> <div class="contact-icons"> <a href="mailto:ilsin205@soongsil.ac.kr" title="Email"><i class="fa-solid fa-envelope"></i></a> <a href="https://github.com/kimdoeon" title="Github username" rel="external nofollow noopener" target="_blank"><i class="fa-brands fa-github"></i></a> <a href="https://www.linkedin.com/in/kimdoeon" title="Linkedin username" rel="external nofollow noopener" target="_blank"><i class="fa-brands fa-linkedin"></i></a> <a href="https://scholar.google.com/citations?user=9ZV9_yMAAAAJ" title="Scholar userid" rel="external nofollow noopener" target="_blank"><i class="ai ai-google-scholar"></i></a> </div> <div class="contact-note">Email is the best way to reach me. </div> </div> </article> </div> </div> <style>
+    /* site-wide: barely-there lavender page background (light mode only; dark theme keeps its own,
+       since html[data-theme=dark] outranks :root). Injected here because this include is on every page. */
+    /* MIT-inspired palette: crimson #B20D35 in light mode, MIT Bright Red #FF1423 in dark. */
+    :root { --global-bg-color: #fefefd; --global-card-bg-color: #fefefd;
+            --global-theme-color: #B20D35; --global-hover-color: #B20D35;
+            --global-code-bg-color: rgba(178, 13, 53, 0.05); }
+    html[data-theme=dark] { --global-theme-color: #FF1423; --global-hover-color: #FF1423; }
+    /* navbar "research" dropdown: center the panel under its toggle
+       (Bootstrap's .dropdown-menu-right pins it to the right edge, so it spilled leftwards). */
+    #navbar .nav-item.dropdown > .dropdown-menu { left: 50% !important; right: auto !important; transform: translateX(-50%); }
+    /* navbar brand: only the bold first name turns red on hover */
+    #navbar .navbar-brand:hover { color: var(--global-text-color); }
+    #navbar .navbar-brand:hover .font-weight-bold { color: var(--global-theme-color); }
+    /* theme toggle: no "system" (half sun/moon) state */
+    #light-toggle-system { display: none !important; }
+    /* back-to-top: lift above the fixed footer (it was hidden behind it), soft MIT gray,
+       arrow exactly centered; keep the hidden state off-screen and click-through. */
+    #back-to-top { background: #a6a7a8 !important; color: #ffffff !important; bottom: 76px !important; right: 24px !important; z-index: 1031 !important; display: flex !important; align-items: center; justify-content: center; }
+    #back-to-top svg { margin: 0 !important; }
+    #back-to-top.hidden { bottom: -80px !important; opacity: 0 !important; pointer-events: none !important; }
+    body { padding-bottom: 90px; }
+    footer.fixed-bottom .container { padding-top: 0.45rem; padding-bottom: 0.3rem; }
+    footer.fixed-bottom .footer-social { font-size: 1.6rem; line-height: 1; padding-top: 0; margin-bottom: 0.3rem; }
+    footer.fixed-bottom .footer-social a { color: var(--global-footer-text-color); margin: 0 0.22rem; }
+    footer.fixed-bottom .footer-social a:hover { color: var(--global-theme-color); text-decoration: none; }
+  </style> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> <div class="footer-social"> <a href="mailto:ilsin205@soongsil.ac.kr" title="Email" aria-label="Email"><i class="fa-solid fa-envelope"></i></a> <a href="https://github.com/kimdoeon" title="GitHub" aria-label="GitHub" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a> <a href="https://www.linkedin.com/in/kimdoeon" title="LinkedIn" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i></a> <a href="https://scholar.google.com/citations?user=9ZV9_yMAAAAJ" title="Google Scholar" aria-label="Google Scholar" target="_blank" rel="noopener"><i class="ai ai-google-scholar"></i></a> </div> Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Last updated: September 03, 2026. </div> </footer> <script>
+    /* Theme toggle: light <-> dark only (drop the "system" step). */
+    (function () {
+      function fix() {
+        try {
+          if (typeof determineThemeSetting !== "function" || typeof setThemeSetting !== "function") return;
+          if (determineThemeSetting() === "system") setThemeSetting(determineComputedTheme());
+          toggleThemeSetting = function () {
+            var cur = determineThemeSetting();
+            if (cur === "system") cur = determineComputedTheme();
+            setThemeSetting(cur === "dark" ? "light" : "dark");
+          };
+        } catch (e) {}
+      }
+      if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", fix);
+      else fix();
+    })();
+  </script> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script>
+  (function () {
+    try {
+      var GA_ID = "G-9VY9M6VNXW";
+      var params = new URLSearchParams(window.location.search);
+      if (params.has("noga")) {
+        if (params.get("noga") === "0") {
+          localStorage.removeItem("ga-opt-out");
+        } else {
+          localStorage.setItem("ga-opt-out", "1");
+        }
+      }
+      if (localStorage.getItem("ga-opt-out") === "1") {
+        window["ga-disable-" + GA_ID] = true;
+      }
+    } catch (e) {}
+  })();
+</script> <script async src="https://www.googletagmanager.com/gtag/js?id=G-9VY9M6VNXW"></script> <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    window.dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+  gtag("config", "G-9VY9M6VNXW");
+</script> <script data-goatcounter="https://kimdoeon.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script> <script>
+  (function () {
+    var force = location.search.indexOf("vn=1") >= 0; // manual test bypass
+    // Storage can throw (Safari "block all cookies") — read defensively so a
+    // storage error never suppresses the beacon.
+    var optedOut = false;
+    try { optedOut = localStorage.getItem("skipgc") === "t"; } catch (e) {}
+    if (optedOut && !force) return;
+
+    var URL_ = "https://visitor-notify.doeon99.workers.dev";
+    var NOW = Date.now(), GAP = 30 * 60 * 1000, trailReset = false; // a visit = activity within 30 min
+
+    function loadArr(k) {
+      try { var v = JSON.parse(sessionStorage.getItem(k) || "[]"); return Array.isArray(v) ? v : []; } catch (e) { return []; }
+    }
+    function save(k, v) { try { sessionStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+    function rid() { return String(Date.now()) + "-" + Math.random().toString(36).slice(2, 8); }
+
+    // Decide first whether this pageview starts a NEW visit, then increment once.
+    var isNew = 1, n = 1;
+    try {
+      var last = parseInt(localStorage.getItem("vn_t") || "0", 10) || 0; // browser-wide, so a 2nd tab isn't a new visit
+      if (last && NOW - last < GAP) isNew = 0;
+      localStorage.setItem("vn_t", String(NOW));
+    } catch (e) {}
+    try {
+      n = parseInt(localStorage.getItem("vn_n") || "0", 10) || 0;
+      if (isNew) { n += 1; localStorage.setItem("vn_n", String(n)); }
+      n = Math.max(1, n);
+    } catch (e) {}
+
+    // A visit id shared through localStorage keeps this tab's sessionStorage trail
+    // aligned with the browser-wide visit (a second tab must not inherit a stale trail).
+    var vid = "";
+    try {
+      if (isNew) { vid = rid(); localStorage.setItem("vn_v", vid); }
+      else vid = localStorage.getItem("vn_v") || "";
+      if (!vid) { vid = rid(); localStorage.setItem("vn_v", vid); }
+      if (sessionStorage.getItem("vn_vid") !== vid) { // different visit → start a fresh trail
+        trailReset = true; // set first: a later storage write may throw
+        sessionStorage.setItem("vn_vid", vid);
+        sessionStorage.removeItem("vn_pg");
+        sessionStorage.removeItem("vn_ck");
+      }
+    } catch (e) {}
+
+    var sentExit = false;
+    // Page trail for this visit: [{p: path, t: entered, d: seconds spent}]
+    var trail = (isNew || trailReset) ? [] : loadArr("vn_pg").filter(function (x) { return x && typeof x.p === "string"; });
+    // Dwell = time this page was actually VISIBLE. performance.now() is monotonic
+    // (immune to clock changes) and the accumulator is reset on bfcache restore.
+    var visMs = 0, visFrom = document.visibilityState === "hidden" ? 0 : performance.now();
+    function markHidden() { if (visFrom) { visMs += performance.now() - visFrom; visFrom = 0; } }
+    function markVisible() { if (!visFrom) visFrom = performance.now(); }
+    function dwellSec() {
+      var ms = visMs + (visFrom ? performance.now() - visFrom : 0);
+      var v = Math.round(ms / 1000);
+      return v < 0 ? 0 : (v > 7200 ? 7200 : v);
+    }
+    function since(t0) { var v = Math.round((Date.now() - (t0 || Date.now())) / 1000); return v < 0 ? 0 : (v > 7200 ? 7200 : v); }
+    addEventListener("pageshow", function (ev) {
+      if (!ev.persisted) return;
+      visMs = 0; visFrom = performance.now(); sentExit = false;
+      // Re-read storage: another page in this tab may have advanced the trail while
+      // this document sat in the back/forward cache.
+      var fresh = loadArr("vn_pg").filter(function (x) { return x && typeof x.p === "string"; });
+      if (fresh.length) trail = fresh;
+      // The restored document is this page again — re-open an entry for it so the
+      // dwell measured from here is not written into whatever page came after.
+      if (!trail.length || trail[trail.length - 1].p !== location.pathname) {
+        if (trail.length && trail[trail.length - 1].d == null) trail[trail.length - 1].d = 0;
+        trail.push({ p: location.pathname, t: Date.now() });
+        if (trail.length > 20) trail = trail.slice(-20);
+      } else {
+        delete trail[trail.length - 1].d; // re-open: dwell restarts for this view
+      }
+      save("vn_pg", trail);
+      clicks = loadArr("vn_ck").filter(function (x) { return x && typeof x.h === "string"; });
+      if (document.visibilityState === "visible") {
+        startBeat();
+        // A restored page may be seconds away from the idle sweep — check in now.
+        try {
+          if (!tooSoon()) {
+            fetch(URL_, {
+              method: "POST", mode: "cors", keepalive: true,
+              headers: { "Content-Type": "text/plain" },
+              body: payload({ s: 0 })
+            }).catch(function () {});
+          }
+        } catch (e) {}
+      }
+    });
+    // The previous page already stored its own visible-time dwell on pagehide/hidden.
+    // Only fill it in as a fallback (wall clock) when that never happened.
+    if (trail.length && trail[trail.length - 1].d == null) trail[trail.length - 1].d = since(trail[trail.length - 1].t);
+    trail.push({ p: location.pathname, t: NOW });
+    if (trail.length > 20) trail = trail.slice(-20);
+    save("vn_pg", trail);
+
+    // Outbound / file clicks (internal navigation already shows up in the trail)
+    var clicks = (isNew || trailReset) ? [] : loadArr("vn_ck").filter(function (x) { return x && typeof x.h === "string"; });
+    save("vn_ck", clicks);
+    function onClick(ev) {
+      try {
+        var a = ev.target && ev.target.closest ? ev.target.closest("a[href]") : null;
+        if (!a) return;
+        var proto = (a.protocol || "").toLowerCase();
+        var special = proto === "mailto:" || proto === "tel:";
+        var ext = !special && a.hostname && a.hostname !== location.hostname;
+        var file = /\.(pdf|zip|pptx?|docx?)$/i.test(a.pathname || "");
+        if (!ext && !file && !special) return;
+        var label = (a.textContent || a.getAttribute("aria-label") || a.title || "").replace(/\s+/g, " ").trim().slice(0, 40);
+        clicks.push({ l: label || "(link)", h: String(a.href || "").slice(0, 120) });
+        if (clicks.length > 15) clicks = clicks.slice(-15);
+        save("vn_ck", clicks);
+      } catch (e) {}
+    }
+    document.addEventListener("click", onClick, true);
+    document.addEventListener("auxclick", function (ev) { if (ev.button === 1) onClick(ev); }, true); // middle-click only
+
+    // Keep the ORIGINAL entry referrer across internal navigation (same visit only).
+    var ref = document.referrer || "";
+    try {
+      var h = ref ? new URL(ref).hostname : "";
+      var internal = h === location.hostname;
+      // On a new visit always rewrite the stored source (empty when direct), so a
+      // stale referrer from an earlier visit can never leak into this one.
+      if (isNew) localStorage.setItem("vn_ref", internal ? "" : (ref || ""));
+      if (!ref || internal) ref = localStorage.getItem("vn_ref") || "";
+    } catch (e) {}
+
+    // campaign tags: apps that strip the referrer often still add these
+    var camp = "";
+    try {
+      var q = new URLSearchParams(location.search);
+      camp = q.get("utm_source") || q.get("ref") ||
+             (q.has("igshid") || q.has("igsh") ? "instagram" : "") ||
+             (q.has("fbclid") ? "facebook" : "") ||
+             (q.has("li_fat_id") ? "linkedin" : "") || "";
+    } catch (e) {}
+
+    var lastSend = 0;
+    function tooSoon() {
+      var t = Date.now();
+      if (t - lastSend < 2000) return true; // KV allows ~1 write/sec per key
+      lastSend = t;
+      return false;
+    }
+    function payload(extra) {
+      var body = {
+        v: vid, p: location.pathname, r: ref, c: camp, n: n, s: isNew,
+        pg: trail, ck: clicks
+      };
+      for (var k in extra) body[k] = extra[k];
+      return JSON.stringify(body);
+    }
+
+    try {
+      fetch(URL_, {
+        method: "POST", mode: "cors", keepalive: true,
+        headers: { "Content-Type": "text/plain" },
+        body: payload({})
+      }).catch(function () {});
+    } catch (e) {}
+
+    // Persist the dwell time whenever the page is hidden (tab switch, app switch).
+    // This never sends a message — it only keeps the stored trail accurate.
+    function persist() {
+      try {
+        if (trail.length) { trail[trail.length - 1].d = dwellSec(); save("vn_pg", trail); }
+      } catch (e) {}
+    }
+    addEventListener("visibilitychange", function () {
+      if (document.visibilityState === "hidden") { markHidden(); persist(); stopBeat(); }
+      else { markVisible(); startBeat(); }
+    });
+
+    // Heartbeat: while the page is VISIBLE, ping every 150 s (just under the Worker's
+    // 180 s idle threshold, and cheap on KV writes) so an open, actively
+    // watched tab is not mistaken for "left the site" by the Worker's idle sweep.
+    // (A hidden/background tab stops pinging, so the visit closes normally.)
+    var beat = null;
+    function startBeat() {
+      if (beat) return;
+      beat = setInterval(function () {
+        if (document.visibilityState !== "visible" || sentExit || tooSoon()) return;
+        try {
+          if (trail.length) { trail[trail.length - 1].d = dwellSec(); save("vn_pg", trail); }
+          fetch(URL_, {
+            method: "POST", mode: "cors", keepalive: true,
+            headers: { "Content-Type": "text/plain" },
+            body: payload({ s: 0 })
+          }).catch(function () {});
+        } catch (e) {}
+      }, 150000);
+    }
+    function stopBeat() { if (beat) { clearInterval(beat); beat = null; } }
+    if (document.visibilityState === "visible") startBeat();
+
+    // On leaving this page, hand the final dwell time to the Worker. The Worker only
+    // aggregates; it sends a single Telegram summary once the whole visit goes quiet.
+    addEventListener("pagehide", function () {
+      markHidden();
+      stopBeat();
+      persist();
+      if (sentExit) return;
+      sentExit = true;
+      try { if (navigator.sendBeacon) navigator.sendBeacon(URL_, payload({ s: 0 })); } catch (e) {}
+    });
+  })();
+</script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script>
+  (function () {
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof window.mediumZoom !== "function" || window.__mzMarginPatched) {
+        return;
+      }
+      window.__mzMarginPatched = true;
+      var orig = window.mediumZoom;
+      window.mediumZoom = function (selector, options) {
+        options = options || {};
+        if (options.margin == null) {
+          options.margin = Math.max(24, Math.round(Math.min(window.innerWidth, window.innerHeight) * 0.08));
+        }
+        return orig(selector, options);
+      };
+    });
+  })();
+</script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> </body> </html>

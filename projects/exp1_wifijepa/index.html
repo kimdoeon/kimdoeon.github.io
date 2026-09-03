@@ -1,0 +1,333 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta name="google-site-verification" content="qJXjVuIrohIX0FgJ8IhlkpxdliG2G0kZdJgGmDDwO2w"> <meta http-equiv="Permissions-Policy" content="interest-cohort=()"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Self-Supervised WiFi Sensing for 3D Human Pose | Doeon Kim (김도언) </title> <meta name="author" content="Doeon Kim"> <meta name="description" content="Doeon Kim (김도언, 숭실대학교) — physics-grounded machine learning for RF / wireless sensing: WiFi-CSI human perception, ray-tracing RF simulation, and sim-to-real transfer. 숭실대학교 김도언 박사과정 연구자의 홈페이지. "> <meta name="keywords" content="WiFi SensingSelf-Supervised Learning3D Human Pose"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%93%A1&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=f0b101217084a90093badfe99ff9a7d1"> <link rel="canonical" href="https://kimdoeon.github.io/projects/exp1_wifijepa/"> <script src="/assets/js/theme.js?v=7af685e2ba20b37fef545c97b8064050"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Doeon</span> Kim </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item dropdown "> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-nav-dropdown-toggle="true" aria-haspopup="true" aria-expanded="false">research </a> <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"> <a class="dropdown-item " href="/projects/">Research Experience</a> <a class="dropdown-item " href="/research-interests/#wireless-perception">Research Interests</a> </div> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">cv </a> </li> <li class="nav-item "> <a class="nav-link" href="/activities/">activities </a> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Self-Supervised WiFi Sensing for 3D Human Pose</h1> <p class="post-description"></p> </header> <article> <style>
+.container.mt-5{max-width:1100px}
+#navbar .nav-item.dropdown>.nav-link.dropdown-toggle{font-weight:bolder;color:var(--global-theme-color)}
+#navbar .nav-item.dropdown>.nav-link.dropdown-toggle:hover{color:var(--global-hover-color)}
+h3{margin-top:5.5rem;margin-bottom:1.7rem;font-weight:700}
+.wj-fig{display:block;max-width:880px;width:100%;margin:1rem auto .3rem;border:1px solid var(--global-divider-color);border-radius:6px;background:#fff}
+.wj-cap{display:block;text-align:center;font-size:.8rem;color:var(--global-text-color-light);margin:.5rem auto 2.1rem;max-width:860px;line-height:1.4}
+.wj-hero{display:block;max-width:620px;width:100%;margin:1rem auto .3rem;border:1px solid var(--global-divider-color);border-radius:6px;background:#fff}
+.wj-fig-sm{display:block;max-width:660px;width:100%;margin:1rem auto .3rem;border:1px solid var(--global-divider-color);border-radius:6px;background:#fff}
+.wj-row{display:flex;flex-wrap:nowrap;justify-content:center;align-items:flex-start;gap:1rem;margin:1.2rem auto 2.1rem;max-width:1080px}
+.wj-row figure{margin:0;min-width:0;text-align:center}
+.wj-row img{display:block;width:100%;height:auto;border:1px solid var(--global-divider-color);border-radius:6px;background:#fff}
+.wj-row figcaption{font-size:.78rem;color:var(--global-text-color-light);text-align:center;margin:.45rem auto 0;line-height:1.35}
+@media(max-width:560px){.wj-row{flex-wrap:wrap}.wj-row figure{flex:1 1 100% !important}}
+.wj-take{margin:1.5rem auto .3rem;max-width:1080px;padding:.6rem .95rem;border-left:3px solid var(--global-theme-color);background:rgba(127,127,127,.08);border-radius:0 5px 5px 0;font-size:.97rem;line-height:1.55}
+.wj-take b{color:var(--global-theme-color);font-weight:700}
+.wj-num{color:var(--global-theme-color);font-weight:700}
+.container.mt-5 li{font-size:1.08rem;line-height:1.65}
+.container.mt-5 .relpub li{font-size:.82rem;line-height:1.55}
+.container.mt-5 .refn{font-size:.72em;color:var(--global-text-color-light);font-weight:600}
+.relpub{font-size:.82rem;color:var(--global-text-color-light);line-height:1.55;margin-top:3rem}
+.relpub h4{font-size:.95rem;font-weight:700;color:var(--global-text-color);margin:0 0 .55rem}
+.relpub ol{list-style:none;counter-reset:refnum;padding-left:0;margin:0}
+.relpub li{counter-increment:refnum;margin-bottom:.45rem;padding-left:1.9rem;text-indent:-1.9rem}
+.relpub li::before{content:"[" counter(refnum) "]\00a0";font-weight:600;color:var(--global-text-color)}
+.relpub strong{color:var(--global-text-color)}
+</style> <p style="font-size:.88rem;color:var(--global-text-color-light);margin:0 0 1.8rem;">Dec 2025 – present  ·  <a href="https://wifi-jepa.github.io/" target="_blank" rel="noopener">Project page ↗</a></p> <p>I study whether <strong>WiFi channel measurements (CSI)</strong> can recover <strong>3D human pose</strong> without cameras. Robust WiFi pose estimation faces three bottlenecks: <em>(i) cross-domain generalization is fragile — accuracy drops in a new room or with moved transceivers; (ii) label scalability is limited — pose labels need camera-based annotation in a few fixed-hardware rooms; (iii) CSI is noisy and hardware-dependent — flattening it into image-like 2D grids mixes its subcarrier, time, and link axes.</em> My answer is <strong>WiFi-JEPA</strong>: self-supervised learning redesigned around CSI’s physical structure — far fewer labels, robust transfer across rooms and hardware. <strong>Accepted at ECCV 2026</strong> <span class="refn">[1]</span>.</p> <h3 id="encoding-wifi-csi-axis-preserving-tokenization--link-masking">Encoding WiFi CSI: axis-preserving tokenization &amp; link masking</h3> <div class="wj-row"> <figure style="flex:2.754"><img src="/assets/img/wj-tokenization2.png" alt="Axis-preserving CSI tokenization vs. flattened spectrogram" data-zoomable=""><figcaption>Axis-preserving tokenization keeps the (C, T, L) tensor — versus a flattened spectrogram that mixes the time and link axes.</figcaption></figure> <figure style="flex:3.161"><img src="/assets/img/wj-masking2.png" alt="Masking strategies on the time-link token grid" data-zoomable=""><figcaption>Link masking (a) removes whole antenna links, versus time, multi-block, and random masking.</figcaption></figure> </div> <ul> <li> <strong>Axis-preserving tokenization:</strong> keep the CSI tensor <strong>(C, T, L) = (60, 20, 9)</strong> — subcarriers × time × antenna links — instead of flattening it into a 2D image; each of the <strong>180 tokens</strong> is one antenna link at one time step, not an arbitrary patch.</li> <li> <strong>Link masking:</strong> hide 5 of 9 antenna links entirely and predict them from the rest — the encoder must learn the <strong>cross-link spatial correlation</strong> that encodes 3D structure.</li> <li> <strong>Result:</strong> tokenization alone cuts <span class="wj-num">14.77 mm MPJPE</span> (111.85 → 97.08) vs. a flattened-spectrogram baseline; link masking beats time, block, and random masking — <span class="wj-num">97.08 mm / 92.56% PCK@50</span>, <span class="wj-num">8.06 mm</span> ahead of random <span class="refn">[1]</span>.</li> </ul> <div class="wj-take"> <b>Key takeaway</b> — Reading CSI on its true physical axes, and masking whole antenna links, teaches the encoder the cross-link structure that flattening destroys.</div> <h3 id="ray-traced-synthetic-csi-sionna-rt">Ray-traced synthetic CSI (Sionna RT)</h3> <div class="wj-row"> <figure style="flex:1.714"><img src="/assets/img/wj-sim2.png" alt="Ray-tracing CSI simulation pipeline" data-zoomable=""><figcaption>Randomized scenes of geometric primitives (Stage 1) rendered with Sionna RT at 20 passes per frame (Stage 2).</figcaption></figure> <figure style="flex:1.777"><img src="/assets/img/wj-overview.png" alt="WiFi-JEPA overview: simulated/real CSI to 3D human pose" data-zoomable=""><figcaption>Simulated and real CSI generation → self-supervised model → 3D human-pose prediction (ground truth vs. prediction).</figcaption></figure> </div> <ul> <li> <strong>Hypothesis:</strong> for pretraining, dynamics diversity matters more than anatomical fidelity.</li> <li> <strong>Why simulate:</strong> real CSI needs dedicated rooms, synchronized receivers, and motion capture for labels — datasets stay small and hardware-specific.</li> <li> <strong>Ray-tracing pipeline (NVIDIA Sionna RT):</strong> benchmark-compatible CSI from randomly moving geometric primitives — spheres, cubes, cylinders — with no human meshes and no motion capture; ~90K frames in ~10 GPU-hours on one RTX 4090.</li> <li> <strong>Result:</strong> real + simulated pretraining cuts multi-person MPJPE from <span class="wj-num">97.1</span> to <span class="wj-num">93.5 mm</span>; primitives <em>alone</em> reach <span class="wj-num">100.1 mm</span>, nearly matching real data <span class="refn">[1]</span>.</li> </ul> <div class="wj-take"> <b>Key takeaway</b> — Randomly moving primitives — no human bodies at all — pretrain CSI nearly as well as real data: motion diversity beats anatomical realism.</div> <h3 id="self-supervised-learning-a-csi-native-jepa">Self-supervised learning: a CSI-native JEPA</h3> <p><img class="wj-fig" src="/assets/img/wj-arch3.png" alt="WiFi-JEPA architecture (Phase 1 pre-training, Phase 2 fine-tuning)" data-zoomable=""> <span class="wj-cap">Phase 1 — self-supervised pre-training: the context encoder predicts the link-masked tokens’ <em>latent</em> embeddings, supervised by an EMA target encoder (Smooth L1). Phase 2 — fine-tuning the pretrained encoder with a PETR pose head.</span></p> <ul> <li> <strong>CSI-native JEPA:</strong> predict the masked links’ latent embeddings instead of reconstructing raw CSI — the encoder learns pose-relevant structure, not hardware artifacts.</li> <li> <strong>Comparison with SSL objectives:</strong> under the same backbone, SimMIM, MAE, BYOL, and MoCo v3 all fall below training from scratch — WiFi-JEPA is the only objective that improves it.</li> <li> <strong>End-to-end:</strong> state-of-the-art <span class="wj-num">76.8 mm single-person / 93.5 mm multi-person MPJPE</span> (<span class="wj-num">−14.7% / −12.8%</span> vs. prior WiFi methods), with <strong>cross-environment error halved</strong> (<span class="wj-num">324.2 vs. 626.4 mm</span>) in leave-one-room-out tests <span class="refn">[1]</span>.</li> </ul> <div class="wj-take"> <b>Key takeaway</b> — Predicting latent link embeddings rather than raw CSI is what makes self-supervision transfer on WiFi — SOTA accuracy that holds in unseen rooms.</div> <div class="relpub"> <h4 id="related-publications">Related publications</h4> <ol> <li> <strong>Doeon Kim</strong>, Jungyoon Lee, Seongheum Kim, Seongsin Kim. “WiFi-JEPA: Self-supervised Learning for WiFi-CSI 3D Human Pose Estimation.” ECCV 2026.</li> </ol> </div> </article> </div> </div> <style>
+    /* site-wide: barely-there lavender page background (light mode only; dark theme keeps its own,
+       since html[data-theme=dark] outranks :root). Injected here because this include is on every page. */
+    /* MIT-inspired palette: crimson #B20D35 in light mode, MIT Bright Red #FF1423 in dark. */
+    :root { --global-bg-color: #fefefd; --global-card-bg-color: #fefefd;
+            --global-theme-color: #B20D35; --global-hover-color: #B20D35;
+            --global-code-bg-color: rgba(178, 13, 53, 0.05); }
+    html[data-theme=dark] { --global-theme-color: #FF1423; --global-hover-color: #FF1423; }
+    /* navbar "research" dropdown: center the panel under its toggle
+       (Bootstrap's .dropdown-menu-right pins it to the right edge, so it spilled leftwards). */
+    #navbar .nav-item.dropdown > .dropdown-menu { left: 50% !important; right: auto !important; transform: translateX(-50%); }
+    /* navbar brand: only the bold first name turns red on hover */
+    #navbar .navbar-brand:hover { color: var(--global-text-color); }
+    #navbar .navbar-brand:hover .font-weight-bold { color: var(--global-theme-color); }
+    /* theme toggle: no "system" (half sun/moon) state */
+    #light-toggle-system { display: none !important; }
+    /* back-to-top: lift above the fixed footer (it was hidden behind it), soft MIT gray,
+       arrow exactly centered; keep the hidden state off-screen and click-through. */
+    #back-to-top { background: #a6a7a8 !important; color: #ffffff !important; bottom: 76px !important; right: 24px !important; z-index: 1031 !important; display: flex !important; align-items: center; justify-content: center; }
+    #back-to-top svg { margin: 0 !important; }
+    #back-to-top.hidden { bottom: -80px !important; opacity: 0 !important; pointer-events: none !important; }
+    body { padding-bottom: 90px; }
+    footer.fixed-bottom .container { padding-top: 0.45rem; padding-bottom: 0.3rem; }
+    footer.fixed-bottom .footer-social { font-size: 1.6rem; line-height: 1; padding-top: 0; margin-bottom: 0.3rem; }
+    footer.fixed-bottom .footer-social a { color: var(--global-footer-text-color); margin: 0 0.22rem; }
+    footer.fixed-bottom .footer-social a:hover { color: var(--global-theme-color); text-decoration: none; }
+  </style> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> <div class="footer-social"> <a href="mailto:ilsin205@soongsil.ac.kr" title="Email" aria-label="Email"><i class="fa-solid fa-envelope"></i></a> <a href="https://github.com/kimdoeon" title="GitHub" aria-label="GitHub" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a> <a href="https://www.linkedin.com/in/kimdoeon" title="LinkedIn" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i></a> <a href="https://scholar.google.com/citations?user=9ZV9_yMAAAAJ" title="Google Scholar" aria-label="Google Scholar" target="_blank" rel="noopener"><i class="ai ai-google-scholar"></i></a> </div> Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Last updated: September 03, 2026. </div> </footer> <script>
+    /* Theme toggle: light <-> dark only (drop the "system" step). */
+    (function () {
+      function fix() {
+        try {
+          if (typeof determineThemeSetting !== "function" || typeof setThemeSetting !== "function") return;
+          if (determineThemeSetting() === "system") setThemeSetting(determineComputedTheme());
+          toggleThemeSetting = function () {
+            var cur = determineThemeSetting();
+            if (cur === "system") cur = determineComputedTheme();
+            setThemeSetting(cur === "dark" ? "light" : "dark");
+          };
+        } catch (e) {}
+      }
+      if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", fix);
+      else fix();
+    })();
+  </script> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script>
+  (function () {
+    try {
+      var GA_ID = "G-9VY9M6VNXW";
+      var params = new URLSearchParams(window.location.search);
+      if (params.has("noga")) {
+        if (params.get("noga") === "0") {
+          localStorage.removeItem("ga-opt-out");
+        } else {
+          localStorage.setItem("ga-opt-out", "1");
+        }
+      }
+      if (localStorage.getItem("ga-opt-out") === "1") {
+        window["ga-disable-" + GA_ID] = true;
+      }
+    } catch (e) {}
+  })();
+</script> <script async src="https://www.googletagmanager.com/gtag/js?id=G-9VY9M6VNXW"></script> <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    window.dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+  gtag("config", "G-9VY9M6VNXW");
+</script> <script data-goatcounter="https://kimdoeon.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script> <script>
+  (function () {
+    var force = location.search.indexOf("vn=1") >= 0; // manual test bypass
+    // Storage can throw (Safari "block all cookies") — read defensively so a
+    // storage error never suppresses the beacon.
+    var optedOut = false;
+    try { optedOut = localStorage.getItem("skipgc") === "t"; } catch (e) {}
+    if (optedOut && !force) return;
+
+    var URL_ = "https://visitor-notify.doeon99.workers.dev";
+    var NOW = Date.now(), GAP = 30 * 60 * 1000, trailReset = false; // a visit = activity within 30 min
+
+    function loadArr(k) {
+      try { var v = JSON.parse(sessionStorage.getItem(k) || "[]"); return Array.isArray(v) ? v : []; } catch (e) { return []; }
+    }
+    function save(k, v) { try { sessionStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+    function rid() { return String(Date.now()) + "-" + Math.random().toString(36).slice(2, 8); }
+
+    // Decide first whether this pageview starts a NEW visit, then increment once.
+    var isNew = 1, n = 1;
+    try {
+      var last = parseInt(localStorage.getItem("vn_t") || "0", 10) || 0; // browser-wide, so a 2nd tab isn't a new visit
+      if (last && NOW - last < GAP) isNew = 0;
+      localStorage.setItem("vn_t", String(NOW));
+    } catch (e) {}
+    try {
+      n = parseInt(localStorage.getItem("vn_n") || "0", 10) || 0;
+      if (isNew) { n += 1; localStorage.setItem("vn_n", String(n)); }
+      n = Math.max(1, n);
+    } catch (e) {}
+
+    // A visit id shared through localStorage keeps this tab's sessionStorage trail
+    // aligned with the browser-wide visit (a second tab must not inherit a stale trail).
+    var vid = "";
+    try {
+      if (isNew) { vid = rid(); localStorage.setItem("vn_v", vid); }
+      else vid = localStorage.getItem("vn_v") || "";
+      if (!vid) { vid = rid(); localStorage.setItem("vn_v", vid); }
+      if (sessionStorage.getItem("vn_vid") !== vid) { // different visit → start a fresh trail
+        trailReset = true; // set first: a later storage write may throw
+        sessionStorage.setItem("vn_vid", vid);
+        sessionStorage.removeItem("vn_pg");
+        sessionStorage.removeItem("vn_ck");
+      }
+    } catch (e) {}
+
+    var sentExit = false;
+    // Page trail for this visit: [{p: path, t: entered, d: seconds spent}]
+    var trail = (isNew || trailReset) ? [] : loadArr("vn_pg").filter(function (x) { return x && typeof x.p === "string"; });
+    // Dwell = time this page was actually VISIBLE. performance.now() is monotonic
+    // (immune to clock changes) and the accumulator is reset on bfcache restore.
+    var visMs = 0, visFrom = document.visibilityState === "hidden" ? 0 : performance.now();
+    function markHidden() { if (visFrom) { visMs += performance.now() - visFrom; visFrom = 0; } }
+    function markVisible() { if (!visFrom) visFrom = performance.now(); }
+    function dwellSec() {
+      var ms = visMs + (visFrom ? performance.now() - visFrom : 0);
+      var v = Math.round(ms / 1000);
+      return v < 0 ? 0 : (v > 7200 ? 7200 : v);
+    }
+    function since(t0) { var v = Math.round((Date.now() - (t0 || Date.now())) / 1000); return v < 0 ? 0 : (v > 7200 ? 7200 : v); }
+    addEventListener("pageshow", function (ev) {
+      if (!ev.persisted) return;
+      visMs = 0; visFrom = performance.now(); sentExit = false;
+      // Re-read storage: another page in this tab may have advanced the trail while
+      // this document sat in the back/forward cache.
+      var fresh = loadArr("vn_pg").filter(function (x) { return x && typeof x.p === "string"; });
+      if (fresh.length) trail = fresh;
+      // The restored document is this page again — re-open an entry for it so the
+      // dwell measured from here is not written into whatever page came after.
+      if (!trail.length || trail[trail.length - 1].p !== location.pathname) {
+        if (trail.length && trail[trail.length - 1].d == null) trail[trail.length - 1].d = 0;
+        trail.push({ p: location.pathname, t: Date.now() });
+        if (trail.length > 20) trail = trail.slice(-20);
+      } else {
+        delete trail[trail.length - 1].d; // re-open: dwell restarts for this view
+      }
+      save("vn_pg", trail);
+      clicks = loadArr("vn_ck").filter(function (x) { return x && typeof x.h === "string"; });
+      if (document.visibilityState === "visible") {
+        startBeat();
+        // A restored page may be seconds away from the idle sweep — check in now.
+        try {
+          if (!tooSoon()) {
+            fetch(URL_, {
+              method: "POST", mode: "cors", keepalive: true,
+              headers: { "Content-Type": "text/plain" },
+              body: payload({ s: 0 })
+            }).catch(function () {});
+          }
+        } catch (e) {}
+      }
+    });
+    // The previous page already stored its own visible-time dwell on pagehide/hidden.
+    // Only fill it in as a fallback (wall clock) when that never happened.
+    if (trail.length && trail[trail.length - 1].d == null) trail[trail.length - 1].d = since(trail[trail.length - 1].t);
+    trail.push({ p: location.pathname, t: NOW });
+    if (trail.length > 20) trail = trail.slice(-20);
+    save("vn_pg", trail);
+
+    // Outbound / file clicks (internal navigation already shows up in the trail)
+    var clicks = (isNew || trailReset) ? [] : loadArr("vn_ck").filter(function (x) { return x && typeof x.h === "string"; });
+    save("vn_ck", clicks);
+    function onClick(ev) {
+      try {
+        var a = ev.target && ev.target.closest ? ev.target.closest("a[href]") : null;
+        if (!a) return;
+        var proto = (a.protocol || "").toLowerCase();
+        var special = proto === "mailto:" || proto === "tel:";
+        var ext = !special && a.hostname && a.hostname !== location.hostname;
+        var file = /\.(pdf|zip|pptx?|docx?)$/i.test(a.pathname || "");
+        if (!ext && !file && !special) return;
+        var label = (a.textContent || a.getAttribute("aria-label") || a.title || "").replace(/\s+/g, " ").trim().slice(0, 40);
+        clicks.push({ l: label || "(link)", h: String(a.href || "").slice(0, 120) });
+        if (clicks.length > 15) clicks = clicks.slice(-15);
+        save("vn_ck", clicks);
+      } catch (e) {}
+    }
+    document.addEventListener("click", onClick, true);
+    document.addEventListener("auxclick", function (ev) { if (ev.button === 1) onClick(ev); }, true); // middle-click only
+
+    // Keep the ORIGINAL entry referrer across internal navigation (same visit only).
+    var ref = document.referrer || "";
+    try {
+      var h = ref ? new URL(ref).hostname : "";
+      var internal = h === location.hostname;
+      // On a new visit always rewrite the stored source (empty when direct), so a
+      // stale referrer from an earlier visit can never leak into this one.
+      if (isNew) localStorage.setItem("vn_ref", internal ? "" : (ref || ""));
+      if (!ref || internal) ref = localStorage.getItem("vn_ref") || "";
+    } catch (e) {}
+
+    // campaign tags: apps that strip the referrer often still add these
+    var camp = "";
+    try {
+      var q = new URLSearchParams(location.search);
+      camp = q.get("utm_source") || q.get("ref") ||
+             (q.has("igshid") || q.has("igsh") ? "instagram" : "") ||
+             (q.has("fbclid") ? "facebook" : "") ||
+             (q.has("li_fat_id") ? "linkedin" : "") || "";
+    } catch (e) {}
+
+    var lastSend = 0;
+    function tooSoon() {
+      var t = Date.now();
+      if (t - lastSend < 2000) return true; // KV allows ~1 write/sec per key
+      lastSend = t;
+      return false;
+    }
+    function payload(extra) {
+      var body = {
+        v: vid, p: location.pathname, r: ref, c: camp, n: n, s: isNew,
+        pg: trail, ck: clicks
+      };
+      for (var k in extra) body[k] = extra[k];
+      return JSON.stringify(body);
+    }
+
+    try {
+      fetch(URL_, {
+        method: "POST", mode: "cors", keepalive: true,
+        headers: { "Content-Type": "text/plain" },
+        body: payload({})
+      }).catch(function () {});
+    } catch (e) {}
+
+    // Persist the dwell time whenever the page is hidden (tab switch, app switch).
+    // This never sends a message — it only keeps the stored trail accurate.
+    function persist() {
+      try {
+        if (trail.length) { trail[trail.length - 1].d = dwellSec(); save("vn_pg", trail); }
+      } catch (e) {}
+    }
+    addEventListener("visibilitychange", function () {
+      if (document.visibilityState === "hidden") { markHidden(); persist(); stopBeat(); }
+      else { markVisible(); startBeat(); }
+    });
+
+    // Heartbeat: while the page is VISIBLE, ping every 150 s (just under the Worker's
+    // 180 s idle threshold, and cheap on KV writes) so an open, actively
+    // watched tab is not mistaken for "left the site" by the Worker's idle sweep.
+    // (A hidden/background tab stops pinging, so the visit closes normally.)
+    var beat = null;
+    function startBeat() {
+      if (beat) return;
+      beat = setInterval(function () {
+        if (document.visibilityState !== "visible" || sentExit || tooSoon()) return;
+        try {
+          if (trail.length) { trail[trail.length - 1].d = dwellSec(); save("vn_pg", trail); }
+          fetch(URL_, {
+            method: "POST", mode: "cors", keepalive: true,
+            headers: { "Content-Type": "text/plain" },
+            body: payload({ s: 0 })
+          }).catch(function () {});
+        } catch (e) {}
+      }, 150000);
+    }
+    function stopBeat() { if (beat) { clearInterval(beat); beat = null; } }
+    if (document.visibilityState === "visible") startBeat();
+
+    // On leaving this page, hand the final dwell time to the Worker. The Worker only
+    // aggregates; it sends a single Telegram summary once the whole visit goes quiet.
+    addEventListener("pagehide", function () {
+      markHidden();
+      stopBeat();
+      persist();
+      if (sentExit) return;
+      sentExit = true;
+      try { if (navigator.sendBeacon) navigator.sendBeacon(URL_, payload({ s: 0 })); } catch (e) {}
+    });
+  })();
+</script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script>
+  (function () {
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof window.mediumZoom !== "function" || window.__mzMarginPatched) {
+        return;
+      }
+      window.__mzMarginPatched = true;
+      var orig = window.mediumZoom;
+      window.mediumZoom = function (selector, options) {
+        options = options || {};
+        if (options.margin == null) {
+          options.margin = Math.max(24, Math.round(Math.min(window.innerWidth, window.innerHeight) * 0.08));
+        }
+        return orig(selector, options);
+      };
+    });
+  })();
+</script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> </body> </html>
