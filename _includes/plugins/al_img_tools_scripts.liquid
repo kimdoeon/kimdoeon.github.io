@@ -1,0 +1,29 @@
+{% comment %}
+  Parse-safe wrapper for al_img_tools custom tag.
+{% endcomment %}
+{% al_img_tools_scripts %}
+{% comment %}
+  Custom override: make medium-zoom open figures *moderately* (a viewport-
+  proportional margin) instead of edge-to-edge / overflowing the screen.
+  al_img_tools' zoom.js calls the global mediumZoom() with no margin; this
+  inline script runs during parse, so its DOMContentLoaded handler is
+  registered BEFORE zoom.js's deferred one and patches mediumZoom first.
+{% endcomment %}
+<script>
+  (function () {
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof window.mediumZoom !== "function" || window.__mzMarginPatched) {
+        return;
+      }
+      window.__mzMarginPatched = true;
+      var orig = window.mediumZoom;
+      window.mediumZoom = function (selector, options) {
+        options = options || {};
+        if (options.margin == null) {
+          options.margin = Math.max(24, Math.round(Math.min(window.innerWidth, window.innerHeight) * 0.08));
+        }
+        return orig(selector, options);
+      };
+    });
+  })();
+</script>

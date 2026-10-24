@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Doeon Kim — CV &amp; Portfolio</title>
+<style>
+:root{--fg:#1f2328;--muted:#6b7280;--line:#e5e7eb;--accent:#b509ac;--bg:#fff;--card:#faf9fc}
+@media (prefers-color-scheme:dark){:root{--fg:#e6e6e6;--muted:#9aa0a6;--line:#2c2f36;--bg:#14151a;--card:#1b1c22}}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+.wrap{max-width:1000px;margin:0 auto;padding:28px 18px 60px}
+h1{font-size:1.6rem;margin:0 0 .15rem}
+.sub{color:var(--muted);margin:0 0 1.4rem;font-size:.95rem}.sub a{color:inherit}
+.msg{border:1px solid var(--line);background:var(--card);padding:14px 16px;border-radius:10px;margin-bottom:18px}
+.msg.err{border-color:#d33}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+@media(max-width:640px){.cards{grid-template-columns:1fr}}
+.card{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:16px 16px 14px}
+.card.active{border-color:var(--accent)}
+.card h2{font-size:1.05rem;margin:0 0 .2rem}
+.meta{color:var(--muted);font-size:.85rem;margin:0 0 .8rem}
+.btns{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn{display:inline-block;padding:.42rem .85rem;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--fg);text-decoration:none;font-size:.9rem}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{filter:brightness(1.08);color:#fff}
+.btn.disabled{opacity:.4;pointer-events:none}
+.status{color:var(--muted);font-size:.85rem}
+iframe{width:100%;height:min(1100px,82vh);border:1px solid var(--line);border-radius:8px;background:#fff}
+.note{color:var(--muted);font-size:.8rem;margin-top:22px}
+@media(max-width:700px){iframe,.viewbtn{display:none}}
+</style></head>
+<body><div class="wrap">
+<h1>Doeon Kim</h1>
+<p class="sub">CV &amp; Portfolio · shared privately by link · <a href="https://kimdoeon.github.io/">kimdoeon.github.io</a></p>
+<p id="msg" class="msg" hidden></p>
+<div class="cards" id="cards"><div class="card" id="card-cv"><h2>Curriculum Vitae</h2><p class="meta">PDF · 3 pages · Updated Oct 21, 2026</p><div class="btns"><a class="btn primary viewbtn disabled" data-view="cv" href="#">View here</a><a class="btn disabled" data-open="cv" target="_blank" rel="noopener" href="#">Open in new tab</a><a class="btn disabled" data-dl="cv" download="Doeon_Kim_CV.pdf" href="#">Download</a><span class="status" id="st-cv">Decrypting…</span></div></div><div class="card" id="card-pf"><h2>Portfolio</h2><p class="meta">PDF · 3 pages · Updated Oct 21, 2026</p><div class="btns"><a class="btn primary viewbtn disabled" data-view="pf" href="#">View here</a><a class="btn disabled" data-open="pf" target="_blank" rel="noopener" href="#">Open in new tab</a><a class="btn disabled" data-dl="pf" download="Doeon_Kim_Portfolio.pdf" href="#">Download</a><span class="status" id="st-pf">Decrypting…</span></div></div></div>
+<iframe id="viewer" title="Document viewer" hidden></iframe>
+<p class="note">This page is shared by link only and is not indexed. Please do not redistribute.</p>
+</div>
+<script>
+(function(){
+var FILES={cv:"cv.bin",pf:"pf.bin"};
+var el=function(i){return document.getElementById(i)};
+function stop(text,err){el("cards").hidden=true;var m=el("msg");m.textContent=text;m.className="msg"+(err?" err":"");m.hidden=false;}
+var m=location.hash.match(/staticrypt_pwd=([0-9a-fA-F]{64})/);
+if(!m){stop("This page is shared by link only. Please open the full link from my email.");return;}
+if(!(window.crypto&&crypto.subtle)){stop("Please open this link in an up-to-date browser over https.",true);return;}
+var enc=new TextEncoder(),docs=window.__docs={};
+var keyP=crypto.subtle.digest("SHA-256",enc.encode("share-v1:"+m[1].toLowerCase())).then(function(raw){return crypto.subtle.importKey("raw",raw,"AES-GCM",false,["decrypt"]);});
+function ready(k,url,len){
+  docs[k]={url:url,len:len};
+  var a=document.querySelector('[data-open="'+k+'"]'),d=document.querySelector('[data-dl="'+k+'"]'),v=document.querySelector('[data-view="'+k+'"]');
+  a.href=url;d.href=url;[a,d,v].forEach(function(x){x.classList.remove("disabled");});
+  el("st-"+k).textContent="";el("card-"+k).setAttribute("data-ready","1");
+  if(k==="cv"&&window.innerWidth>700)show("cv");
+}
+function show(k){
+  if(!docs[k])return;var f=el("viewer");f.hidden=false;f.src=docs[k].url+"#view=FitH";
+  Object.keys(FILES).forEach(function(x){el("card-"+x).classList.toggle("active",x===k);});
+}
+function load(k){
+  return Promise.all([fetch(FILES[k]),keyP]).then(function(r){
+    if(!r[0].ok)throw new Error("HTTP "+r[0].status);
+    return r[0].arrayBuffer().then(function(buf){
+      return crypto.subtle.decrypt({name:"AES-GCM",iv:new Uint8Array(buf,0,12),additionalData:enc.encode(k)},r[1],new Uint8Array(buf,12));
+    });
+  }).then(function(pt){ready(k,URL.createObjectURL(new Blob([pt],{type:"application/pdf"})),pt.byteLength);});
+}
+document.querySelectorAll("[data-view]").forEach(function(a){a.addEventListener("click",function(e){e.preventDefault();show(a.getAttribute("data-view"));});});
+load("cv").then(function(){return load("pf");}).catch(function(e){
+  stop(e&&e.name==="OperationError"?"Could not unlock this link. Please copy the full link from my email.":"Could not load the documents ("+(e&&e.message||"error")+"). Please reload.",true);
+});
+})();
+</script></body></html>

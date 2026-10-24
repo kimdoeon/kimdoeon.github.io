@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Doeon Kim — CV</title>
+<style>
+:root{--fg:#1f2328;--muted:#6b7280;--line:#e5e7eb;--accent:#b509ac;--bg:#fff}
+@media (prefers-color-scheme:dark){:root{--fg:#e6e6e6;--muted:#9aa0a6;--line:#2c2f36;--bg:#14151a}}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg);color:var(--fg);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+.box{max-width:420px;padding:28px 22px;text-align:center}
+.box.err #t{color:#d33}
+#t{margin:.2rem 0 .6rem;font-size:1.05rem}
+.sp{width:26px;height:26px;margin:0 auto 14px;border:3px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:s 0.9s linear infinite}
+@keyframes s{to{transform:rotate(360deg)}}
+#fb{margin-top:.8rem;color:var(--muted);font-size:.9rem}
+#fb a{color:var(--accent);margin:0 .3rem}
+</style></head>
+<body><div class="box" id="box">
+<div class="sp" id="sp"></div>
+<p id="t">Opening CV…</p>
+<p id="fb" hidden>If it did not open automatically:<br><a id="o" target="_blank" rel="noopener" href="#">Open PDF</a> · <a id="d" href="#">Download</a></p>
+</div>
+<script>
+(function(){
+var LABEL="CV",NAME="Doeon_Kim_CV.pdf";
+var $=function(i){return document.getElementById(i)};
+function fail(t){$("t").textContent=t;$("box").className="box err";$("sp").hidden=true;}
+var m=location.hash.match(/[#&]k=([0-9a-fA-F]{64})(?:&|$)/);
+if(!m){$("t").textContent="This page is shared by link only. Please open the full link from my email.";$("sp").hidden=true;return;}
+if(!(window.crypto&&crypto.subtle)){fail("Please open this link in an up-to-date browser over https.");return;}
+var nonav=/[#&]nonav=1(?:&|$)/.test(location.hash);
+var raw=new Uint8Array(32);for(var i=0;i<32;i++)raw[i]=parseInt(m[1].substr(i*2,2),16);
+function get(url,onp){
+  return fetch(url,{cache:"no-cache"}).then(function(r){
+    if(!r.ok)throw new Error("HTTP "+r.status);
+    var total=+r.headers.get("content-length")||0;
+    if(!r.body||!total||!r.body.getReader)return r.arrayBuffer();
+    var rd=r.body.getReader(),parts=[],got=0;
+    return (function pump(){return rd.read().then(function(x){
+      if(x.done){var all=new Uint8Array(got),o=0;parts.forEach(function(p){all.set(p,o);o+=p.length;});return all.buffer;}
+      parts.push(x.value);got+=x.value.length;onp(Math.min(99,Math.round(got*100/total)));return pump();
+    });})();
+  });
+}
+var keyP=crypto.subtle.importKey("raw",raw,"AES-GCM",false,["decrypt"]);
+Promise.all([get("doc.bin",function(p){$("t").textContent="Opening "+LABEL+"… "+p+"%";}),keyP]).then(function(r){
+  return crypto.subtle.decrypt({name:"AES-GCM",iv:new Uint8Array(r[0],0,12),additionalData:new TextEncoder().encode("doc")},r[1],new Uint8Array(r[0],12));
+}).then(function(pt){
+  var url=URL.createObjectURL(new Blob([pt],{type:"application/pdf"}));
+  window.__doc={url:url,len:pt.byteLength};
+  $("o").href=url;$("d").href=url;$("d").setAttribute("download",NAME);
+  $("t").textContent=LABEL+" ready";
+  setTimeout(function(){$("sp").hidden=true;$("fb").hidden=false;},2500);
+  if(!nonav)location.replace(url);
+}).catch(function(e){
+  fail(e&&e.name==="OperationError"?"Could not unlock this link. Please copy the full link from my email.":"Could not load the document ("+(e&&e.message||"error")+"). Please reload.");
+});
+})();
+</script></body></html>

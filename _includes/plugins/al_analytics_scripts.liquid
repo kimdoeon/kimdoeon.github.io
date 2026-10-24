@@ -1,0 +1,253 @@
+{% comment %}
+  Custom owner opt-out (runs BEFORE the gtag snippet below).
+  Visiting any page with ?noga=1 marks THIS browser as opted-out (stored in
+  localStorage), so the owner's own visits stop being counted in Google
+  Analytics. ?noga=0 re-enables. GA4 respects window['ga-disable-<ID>']=true.
+{% endcomment %}
+<script>
+  (function () {
+    try {
+      var GA_ID = "G-9VY9M6VNXW";
+      var params = new URLSearchParams(window.location.search);
+      if (params.has("noga")) {
+        if (params.get("noga") === "0") {
+          localStorage.removeItem("ga-opt-out");
+        } else {
+          localStorage.setItem("ga-opt-out", "1");
+        }
+      }
+      if (localStorage.getItem("ga-opt-out") === "1") {
+        window["ga-disable-" + GA_ID] = true;
+      }
+    } catch (e) {}
+  })();
+</script>
+{% comment %}
+  Parse-safe wrapper for al_analytics custom tag.
+{% endcomment %}
+{% al_analytics_scripts %}
+{% comment %}
+  GoatCounter (visitor counting for the on-page "today's visitors" display).
+  Own visits are excluded server-side via Settings -> Tracking -> Ignore IPs,
+  plus the built-in #toggle-goatcounter opt-out for other devices.
+{% endcomment %}
+<script data-goatcounter="https://kimdoeon.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+{% if site.visitor_notify_url %}
+{% comment %}
+  Visitor → Telegram beacon (see _tools/visitor-notify). Pings on each pageview and on
+  pagehide; the Worker aggregates them and sends ONE summary when the visit goes quiet.
+  skipped on browsers where the owner set the GoatCounter opt-out (localStorage skipgc).
+  Content-Type text/plain keeps it a "simple" CORS request (no preflight).
+{% endcomment %}
+<script>
+  (function () {
+    var force = location.search.indexOf("vn=1") >= 0; // manual test bypass
+    // Storage can throw (Safari "block all cookies") — read defensively so a
+    // storage error never suppresses the beacon.
+    var optedOut = false;
+    try { optedOut = localStorage.getItem("skipgc") === "t"; } catch (e) {}
+    if (optedOut && !force) return;
+
+    var URL_ = {{ site.visitor_notify_url | jsonify }};
+    var NOW = Date.now(), GAP = 30 * 60 * 1000, trailReset = false; // a visit = activity within 30 min
+
+    function loadArr(k) {
+      try { var v = JSON.parse(sessionStorage.getItem(k) || "[]"); return Array.isArray(v) ? v : []; } catch (e) { return []; }
+    }
+    function save(k, v) { try { sessionStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+    function rid() { return String(Date.now()) + "-" + Math.random().toString(36).slice(2, 8); }
+
+    // Decide first whether this pageview starts a NEW visit, then increment once.
+    var isNew = 1, n = 1;
+    try {
+      var last = parseInt(localStorage.getItem("vn_t") || "0", 10) || 0; // browser-wide, so a 2nd tab isn't a new visit
+      if (last && NOW - last < GAP) isNew = 0;
+      localStorage.setItem("vn_t", String(NOW));
+    } catch (e) {}
+    try {
+      n = parseInt(localStorage.getItem("vn_n") || "0", 10) || 0;
+      if (isNew) { n += 1; localStorage.setItem("vn_n", String(n)); }
+      n = Math.max(1, n);
+    } catch (e) {}
+
+    // A visit id shared through localStorage keeps this tab's sessionStorage trail
+    // aligned with the browser-wide visit (a second tab must not inherit a stale trail).
+    var vid = "";
+    try {
+      if (isNew) { vid = rid(); localStorage.setItem("vn_v", vid); }
+      else vid = localStorage.getItem("vn_v") || "";
+      if (!vid) { vid = rid(); localStorage.setItem("vn_v", vid); }
+      if (sessionStorage.getItem("vn_vid") !== vid) { // different visit → start a fresh trail
+        trailReset = true; // set first: a later storage write may throw
+        sessionStorage.setItem("vn_vid", vid);
+        sessionStorage.removeItem("vn_pg");
+        sessionStorage.removeItem("vn_ck");
+      }
+    } catch (e) {}
+
+    var sentExit = false;
+    // Page trail for this visit: [{p: path, t: entered, d: seconds spent}]
+    var trail = (isNew || trailReset) ? [] : loadArr("vn_pg").filter(function (x) { return x && typeof x.p === "string"; });
+    // Dwell = time this page was actually VISIBLE. performance.now() is monotonic
+    // (immune to clock changes) and the accumulator is reset on bfcache restore.
+    var visMs = 0, visFrom = document.visibilityState === "hidden" ? 0 : performance.now();
+    function markHidden() { if (visFrom) { visMs += performance.now() - visFrom; visFrom = 0; } }
+    function markVisible() { if (!visFrom) visFrom = performance.now(); }
+    function dwellSec() {
+      var ms = visMs + (visFrom ? performance.now() - visFrom : 0);
+      var v = Math.round(ms / 1000);
+      return v < 0 ? 0 : (v > 7200 ? 7200 : v);
+    }
+    function since(t0) { var v = Math.round((Date.now() - (t0 || Date.now())) / 1000); return v < 0 ? 0 : (v > 7200 ? 7200 : v); }
+    addEventListener("pageshow", function (ev) {
+      if (!ev.persisted) return;
+      visMs = 0; visFrom = performance.now(); sentExit = false;
+      // Re-read storage: another page in this tab may have advanced the trail while
+      // this document sat in the back/forward cache.
+      var fresh = loadArr("vn_pg").filter(function (x) { return x && typeof x.p === "string"; });
+      if (fresh.length) trail = fresh;
+      // The restored document is this page again — re-open an entry for it so the
+      // dwell measured from here is not written into whatever page came after.
+      if (!trail.length || trail[trail.length - 1].p !== location.pathname) {
+        if (trail.length && trail[trail.length - 1].d == null) trail[trail.length - 1].d = 0;
+        trail.push({ p: location.pathname, t: Date.now() });
+        if (trail.length > 20) trail = trail.slice(-20);
+      } else {
+        delete trail[trail.length - 1].d; // re-open: dwell restarts for this view
+      }
+      save("vn_pg", trail);
+      clicks = loadArr("vn_ck").filter(function (x) { return x && typeof x.h === "string"; });
+      if (document.visibilityState === "visible") {
+        startBeat();
+        // A restored page may be seconds away from the idle sweep — check in now.
+        try {
+          if (!tooSoon()) {
+            fetch(URL_, {
+              method: "POST", mode: "cors", keepalive: true,
+              headers: { "Content-Type": "text/plain" },
+              body: payload({ s: 0 })
+            }).catch(function () {});
+          }
+        } catch (e) {}
+      }
+    });
+    // The previous page already stored its own visible-time dwell on pagehide/hidden.
+    // Only fill it in as a fallback (wall clock) when that never happened.
+    if (trail.length && trail[trail.length - 1].d == null) trail[trail.length - 1].d = since(trail[trail.length - 1].t);
+    trail.push({ p: location.pathname, t: NOW });
+    if (trail.length > 20) trail = trail.slice(-20);
+    save("vn_pg", trail);
+
+    // Outbound / file clicks (internal navigation already shows up in the trail)
+    var clicks = (isNew || trailReset) ? [] : loadArr("vn_ck").filter(function (x) { return x && typeof x.h === "string"; });
+    save("vn_ck", clicks);
+    function onClick(ev) {
+      try {
+        var a = ev.target && ev.target.closest ? ev.target.closest("a[href]") : null;
+        if (!a) return;
+        var proto = (a.protocol || "").toLowerCase();
+        var special = proto === "mailto:" || proto === "tel:";
+        var ext = !special && a.hostname && a.hostname !== location.hostname;
+        var file = /\.(pdf|zip|pptx?|docx?)$/i.test(a.pathname || "");
+        if (!ext && !file && !special) return;
+        var label = (a.textContent || a.getAttribute("aria-label") || a.title || "").replace(/\s+/g, " ").trim().slice(0, 40);
+        clicks.push({ l: label || "(link)", h: String(a.href || "").slice(0, 120) });
+        if (clicks.length > 15) clicks = clicks.slice(-15);
+        save("vn_ck", clicks);
+      } catch (e) {}
+    }
+    document.addEventListener("click", onClick, true);
+    document.addEventListener("auxclick", function (ev) { if (ev.button === 1) onClick(ev); }, true); // middle-click only
+
+    // Keep the ORIGINAL entry referrer across internal navigation (same visit only).
+    var ref = document.referrer || "";
+    try {
+      var h = ref ? new URL(ref).hostname : "";
+      var internal = h === location.hostname;
+      // On a new visit always rewrite the stored source (empty when direct), so a
+      // stale referrer from an earlier visit can never leak into this one.
+      if (isNew) localStorage.setItem("vn_ref", internal ? "" : (ref || ""));
+      if (!ref || internal) ref = localStorage.getItem("vn_ref") || "";
+    } catch (e) {}
+
+    // campaign tags: apps that strip the referrer often still add these
+    var camp = "";
+    try {
+      var q = new URLSearchParams(location.search);
+      camp = q.get("utm_source") || q.get("ref") ||
+             (q.has("igshid") || q.has("igsh") ? "instagram" : "") ||
+             (q.has("fbclid") ? "facebook" : "") ||
+             (q.has("li_fat_id") ? "linkedin" : "") || "";
+    } catch (e) {}
+
+    var lastSend = 0;
+    function tooSoon() {
+      var t = Date.now();
+      if (t - lastSend < 2000) return true; // KV allows ~1 write/sec per key
+      lastSend = t;
+      return false;
+    }
+    function payload(extra) {
+      var body = {
+        v: vid, p: location.pathname, r: ref, c: camp, n: n, s: isNew,
+        pg: trail, ck: clicks
+      };
+      for (var k in extra) body[k] = extra[k];
+      return JSON.stringify(body);
+    }
+
+    try {
+      fetch(URL_, {
+        method: "POST", mode: "cors", keepalive: true,
+        headers: { "Content-Type": "text/plain" },
+        body: payload({})
+      }).catch(function () {});
+    } catch (e) {}
+
+    // Persist the dwell time whenever the page is hidden (tab switch, app switch).
+    // This never sends a message — it only keeps the stored trail accurate.
+    function persist() {
+      try {
+        if (trail.length) { trail[trail.length - 1].d = dwellSec(); save("vn_pg", trail); }
+      } catch (e) {}
+    }
+    addEventListener("visibilitychange", function () {
+      if (document.visibilityState === "hidden") { markHidden(); persist(); stopBeat(); }
+      else { markVisible(); startBeat(); }
+    });
+
+    // Heartbeat: while the page is VISIBLE, ping every 150 s (just under the Worker's
+    // 180 s idle threshold, and cheap on KV writes) so an open, actively
+    // watched tab is not mistaken for "left the site" by the Worker's idle sweep.
+    // (A hidden/background tab stops pinging, so the visit closes normally.)
+    var beat = null;
+    function startBeat() {
+      if (beat) return;
+      beat = setInterval(function () {
+        if (document.visibilityState !== "visible" || sentExit || tooSoon()) return;
+        try {
+          if (trail.length) { trail[trail.length - 1].d = dwellSec(); save("vn_pg", trail); }
+          fetch(URL_, {
+            method: "POST", mode: "cors", keepalive: true,
+            headers: { "Content-Type": "text/plain" },
+            body: payload({ s: 0 })
+          }).catch(function () {});
+        } catch (e) {}
+      }, 150000);
+    }
+    function stopBeat() { if (beat) { clearInterval(beat); beat = null; } }
+    if (document.visibilityState === "visible") startBeat();
+
+    // On leaving this page, hand the final dwell time to the Worker. The Worker only
+    // aggregates; it sends a single Telegram summary once the whole visit goes quiet.
+    addEventListener("pagehide", function () {
+      markHidden();
+      stopBeat();
+      persist();
+      if (sentExit) return;
+      sentExit = true;
+      try { if (navigator.sendBeacon) navigator.sendBeacon(URL_, payload({ s: 0 })); } catch (e) {}
+    });
+  })();
+</script>
+{% endif %}
