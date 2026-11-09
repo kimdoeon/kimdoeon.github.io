@@ -1,0 +1,19 @@
+metadata:
+  last_updated: '2026-08-03'
+papers:
+  9ZV9_yMAAAAJ:9yKSN-GCB0IC:
+    citations: 0
+    title: Multi-Modal Conditioned High-Resolution Transformer for Urban Electromagnetic Field Map Prediction Download PDF
+    year: '2026'
+  9ZV9_yMAAAAJ:d1gkVwhDpl0C:
+    citations: 0
+    title: 'Translating Text in Wild: Natural Image Translation System Implementation based on PaddleOCR and SRNet++'
+    year: '2025'
+  9ZV9_yMAAAAJ:qjMakFHDy7sC:
+    citations: 0
+    title: 'WiFi-JEPA: Self-supervised Learning for WiFi-CSI 3D Human Pose Estimation'
+    year: '2026'
+  9ZV9_yMAAAAJ:u5HHmVD_uO8C:
+    citations: 3
+    title: 'Estimation of electromagnetic field strength: Experiments using vision transformers'
+    year: '2025'

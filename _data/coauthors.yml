@@ -1,0 +1,6 @@
+# Co-authors to auto-link on the publications page.
+# Key = last name (lowercase, no accents); firstname lists the name variants to match.
+
+"lee":
+  - firstname: ["Jungyoon", "J."]
+    url: https://jungyoon-lee.github.io/

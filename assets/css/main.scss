@@ -1,0 +1,157 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+@charset "utf-8";
+
+/* Built-in Sass modules you'll likely use across partials */
+@use "sass:math";
+@use "sass:string";
+
+/* Configure your design tokens BEFORE loading any of your partials. */
+@use "variables" with (
+  $max-content-width: {{ site.max_width | default:  "930px" }}
+);
+
+/* Your project partials */
+@use "themes";
+@use "layout";
+
+// Core styles organized by usage
+@use "typography";
+@use "navbar";
+@use "footer";
+@use "blog";
+@use "publications";
+@use "components";
+@use "utilities";
+
+// Other specialized styles
+@use "tabs";
+@use "teachings";
+@use "typograms";
+
+/* ───────────────────────────────────────────────
+   Custom: navbar "research" dropdown
+   - open on hover (desktop pointers); click still works on touch
+   - left-align dropdown items
+   - lighter caret (triangle)
+   ─────────────────────────────────────────────── */
+#navbar .dropdown-menu .dropdown-item {
+  text-align: left;
+}
+#navbar .dropdown-toggle::after {
+  opacity: 0.45;
+}
+@media (hover: hover) and (pointer: fine) {
+  #navbar .nav-item.dropdown:hover > .dropdown-menu,
+  #navbar .nav-item.dropdown:focus-within > .dropdown-menu {
+    display: block;
+  }
+  /* invisible bridge so the menu stays open while the cursor crosses the gap */
+  #navbar .nav-item.dropdown > .dropdown-menu::before {
+    content: "";
+    position: absolute;
+    top: -0.6rem;
+    left: 0;
+    right: 0;
+    height: 0.6rem;
+  }
+}
+
+/* hide the "ctrl k" hint in the navbar search button, keep the icon (global) */
+#search-toggle .nav-link { font-size: 0; }
+#search-toggle .nav-link i { font-size: 1rem; }
+
+/* navbar dropdown: no persistent purple "active" box on the current-page item — make it look/behave like a normal item */
+#navbar .dropdown-item.active { background-color: transparent !important; color: var(--global-text-color) !important; }
+#navbar .dropdown-item.active:hover { color: var(--global-hover-color) !important; background-color: var(--global-bg-color) !important; }
+
+/* ───────────────────────────────────────────────
+   Custom: navbar spans the full page width
+   - brand ("Doeon Kim") sits at the far left edge
+   - nav links sit at the far right edge
+   - applies on every page
+   ─────────────────────────────────────────────── */
+#navbar > .container {
+  max-width: 100%;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+/* ───────────────────────────────────────────────
+   Custom: hide the page scrollbar so the navbar never shifts
+   - the fixed navbar is sized against the layout viewport, so
+     `scrollbar-gutter: stable` does NOT stop it from shifting when a
+     classic scrollbar appears/disappears (CSS Position 3 + Overflow 3/4).
+   - hiding the page scrollbar keeps the viewport width constant on every
+     page (overflowing or not) → no horizontal shift of the fixed navbar.
+   - scrolling still works via wheel / trackpad / touch / keyboard
+     (we never set overflow:hidden).
+   - scoped to html/body only, so inner scrollers keep their own scrollbars.
+   ─────────────────────────────────────────────── */
+html,
+body {
+  scrollbar-width: none; /* Firefox / standard */
+  -ms-overflow-style: none; /* legacy Edge / IE */
+}
+html {
+  scrollbar-gutter: auto; /* override the earlier `stable` */
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none; /* Chromium / Safari */
+  width: 0;
+  height: 0;
+}
+
+/* co-author links: subtle gray, NO underline by default, gray underline on hover.
+   !important to beat the gem's high-specificity '.publications ol.bibliography li .author a' rule. */
+.author a {
+  color: var(--global-text-color-light);
+  border-bottom: 0 !important;
+  text-decoration: none;
+}
+.author a:hover {
+  color: var(--global-text-color-light);
+  border-bottom: 0 !important;
+  text-decoration: underline !important;
+}
+/* venue links (journal / booktitle): slightly lighter than the theme accent */
+.periodical a {
+  color: var(--global-theme-color);
+  opacity: 0.8;
+  border-bottom: 0;
+  text-decoration: none;
+}
+.periodical a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* publication entries: render venue/emphasis upright (no italic) */
+.publications ol.bibliography li em {
+  font-style: normal;
+}
+
+/* highlight the author's own name in bold (keep the default underline) */
+.publications ol.bibliography li .author > em {
+  font-weight: bolder;
+}
+
+/* publications: slightly smaller author + venue text → visual hierarchy under the bold title, less cramped */
+.publications ol.bibliography li .author,
+.publications ol.bibliography li .periodical {
+  font-size: 0.9rem;
+}
+
+/* radiomap: venue reads "Manuscript under review" (no venue named while under review);
+   suppress the auto-appended submission date (zero the line, re-show only the venue <em>). */
+#choi2026radiomap .periodical {
+  font-size: 0;
+}
+#choi2026radiomap .periodical em {
+  font-size: 0.9rem;
+}
+#choi2026radiomap .periodical i {
+  font-style: italic;
+}
